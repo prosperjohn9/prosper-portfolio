@@ -20,8 +20,8 @@ Status: in progress.
 ```
 src/
   app/          routes only: thin pages that compose sections
-  sections/     the parts of a page (Hero, ...), each reading its own content
-  components/   reusable UI: layout/ and receipts/
+  sections/     the parts of a page (Hero, Evidence, Ledger, ...), each reading its content
+  components/   reusable UI: layout/, receipts/, figures/ and ui/
   content/      the words and data on the site, typed by domain/
   domain/       pure TypeScript: rich text, receipt numbering, formatting; no React
   lib/          infrastructure: the head scripts, security headers
