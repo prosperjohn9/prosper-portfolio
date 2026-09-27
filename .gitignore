@@ -48,3 +48,6 @@ next-env.d.ts
 /design/
 /CLAUDE.md
 /.claude/
+
+# the counted repository's folder layout stays private
+/scripts/repo-layout.local.mts

@@ -12,7 +12,8 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "check": "npm run format:check && npm run typecheck && npm run lint && npm run test && npm run build && npm run test:e2e"
+    "check": "npm run format:check && npm run typecheck && npm run lint && npm run test && npm run build && npm run test:e2e",
+    "stats:count": "node scripts/count-repo-stats.mts"
   },
   "dependencies": {
     "next": "16.3.6",
