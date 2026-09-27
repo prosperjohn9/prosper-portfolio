@@ -32,6 +32,11 @@ describe("citedReceipts", () => {
   it("ignores plain text and links", () => {
     expect(citedReceipts([["plain", { text: "a link", href: "/" }]])).toEqual([]);
   });
+
+  it("counts a bare citation the same as a highlighted claim", () => {
+    const cited: RichText<Id> = ["Proof lives here.", { cite: "cv" }];
+    expect(citedReceipts([cited, hero])).toEqual(["cv", "repo", "site"]);
+  });
 });
 
 describe("numberReceipts", () => {
