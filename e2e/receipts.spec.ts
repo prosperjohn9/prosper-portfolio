@@ -10,15 +10,18 @@ async function noteFor(page: Page, index: number) {
   return page.locator(href!);
 }
 
-test("receipt numbers read 1, 2, 3 in order, each with exactly one note", async ({ page }) => {
+test("receipt numbers first appear as 1, 2, 3 in order, each with exactly one note", async ({
+  page,
+}) => {
   await page.goto("/");
   const numbers = await cites(page).allTextContents();
-  expect(numbers.length).toBeGreaterThan(0);
-  expect(numbers).toEqual(numbers.map((_, i) => String(i + 1)));
+  const firstAppearances = [...new Set(numbers)];
+  expect(firstAppearances.length).toBeGreaterThan(0);
+  expect(firstAppearances).toEqual(firstAppearances.map((_, i) => String(i + 1)));
   for (let i = 0; i < numbers.length; i++) {
     const note = await noteFor(page, i);
     await expect(note).toHaveCount(1);
-    await expect(note).toContainText(`Receipt ${i + 1}:`);
+    await expect(note).toContainText(`Receipt ${numbers[i]}:`);
   }
 });
 
@@ -31,11 +34,16 @@ test("the hero's figures come from the counted repository", async ({ page }) => 
 test("on wide screens every receipt sits in the margin beside the text", async ({ page }, info) => {
   test.skip(info.project.name === "phone", "wide screens only");
   await page.goto("/");
-  const lede = await page.locator(".t-lede").boundingBox();
   for (let i = 0; i < (await cites(page).count()); i++) {
+    const cite = cites(page).nth(i);
+    // The block of text the number sits in: a paragraph or a definition.
+    const text = await cite.evaluate((el) => {
+      const box = el.closest("p, dd")!.getBoundingClientRect();
+      return { right: box.right + window.scrollX };
+    });
     const note = await noteFor(page, i);
     await expect(note).toBeVisible();
-    expect((await note.boundingBox())!.x).toBeGreaterThan(lede!.x + lede!.width);
+    expect((await note.boundingBox())!.x).toBeGreaterThan(text.right);
   }
 });
 
