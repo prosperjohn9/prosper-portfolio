@@ -16,7 +16,7 @@ const eslintConfig = defineConfig([
   },
   {
     // Next.js and tool configs require default exports.
-    files: ["src/app/**/*.{ts,tsx}", "*.config.{ts,mjs,js}"],
+    files: ["src/app/**/*.{ts,tsx}", "*.config.{ts,mts,mjs,js}"],
     rules: { "import/no-default-export": "off" },
   },
   {
