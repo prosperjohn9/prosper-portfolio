@@ -8,7 +8,9 @@ const bodyBackground = (page: Page) =>
 
 test("home shows his full name as the page heading", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Prosper\s*Chukwuemeke\s*Osaigbovo/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Prosper\s*Chukwuemeke\s*Osaigbovo/,
+  );
   await expect(page).toHaveTitle(/Prosper Osaigbovo/);
 });
 
@@ -21,7 +23,9 @@ test("the header always offers a way to make contact", async ({ page }) => {
 
 test("section links show on desktop and fold away on phones", async ({ page }, info) => {
   await page.goto("/");
-  const product = page.getByRole("navigation", { name: "Sections" }).getByRole("link", { name: "Product" });
+  const product = page
+    .getByRole("navigation", { name: "Sections" })
+    .getByRole("link", { name: "Product" });
   if (info.project.name === "phone") await expect(product).toBeHidden();
   else await expect(product).toBeVisible();
 });
@@ -44,7 +48,11 @@ test("?theme= forces a theme before first paint, without saving it", async ({ pa
     });
   });
   await page.goto("/?theme=dark");
-  expect(await page.evaluate(() => (window as unknown as { __themeAtParse: string | null }).__themeAtParse)).toBe("dark");
+  expect(
+    await page.evaluate(
+      () => (window as unknown as { __themeAtParse: string | null }).__themeAtParse,
+    ),
+  ).toBe("dark");
   expect(await bodyBackground(page)).toBe(NIGHT);
   expect(await page.evaluate(() => localStorage.getItem("theme"))).toBeNull();
 });
@@ -75,7 +83,9 @@ test("keyboard users can skip straight to the content", async ({ page }, info) =
 test("nothing scrolls sideways at 360px, and the header stays on one line", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await page.goto("/");
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
   expect(overflow).toBeLessThanOrEqual(0);
   const toggle = page.getByRole("button", { name: "Dark theme" });
   const box = await toggle.boundingBox();

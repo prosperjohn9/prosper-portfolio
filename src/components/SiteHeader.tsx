@@ -14,7 +14,10 @@ export function SiteHeader() {
       <Link href="/" className="t-brand whitespace-nowrap no-underline">
         Prosper Osaigbovo
       </Link>
-      <nav aria-label="Sections" className="flex items-center gap-3 text-base sm:gap-4 md:gap-[22px]">
+      <nav
+        aria-label="Sections"
+        className="flex items-center gap-3 text-base sm:gap-4 md:gap-[22px]"
+      >
         {sections.map((s) => (
           <Link
             key={s.id}
@@ -25,7 +28,10 @@ export function SiteHeader() {
           </Link>
         ))}
         {/* Contact stays visible on phones so the way to reach him is never hidden. */}
-        <Link href="/#contact" className="text-graphite no-underline hover:text-ink hover:underline">
+        <Link
+          href="/#contact"
+          className="text-graphite no-underline hover:text-ink hover:underline"
+        >
           Contact
         </Link>
         <ThemeToggle />

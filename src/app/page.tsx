@@ -8,7 +8,9 @@ export default function Home() {
         <span className="block">Chukwuemeke</span>
         <span className="block">Osaigbovo</span>
       </h1>
-      <p className="mt-3.5 text-base text-graphite">Full stack software engineer in Nigeria. He/him.</p>
+      <p className="mt-3.5 text-base text-graphite">
+        Full stack software engineer in Nigeria. He/him.
+      </p>
     </div>
   );
 }

@@ -13,7 +13,14 @@ export default defineConfig({
   reporter: [["list"]],
   use: { baseURL, channel: "chrome", trace: "retain-on-failure" },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"], channel: "chrome", viewport: { width: 1440, height: 900 } } },
+    {
+      name: "desktop",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+        viewport: { width: 1440, height: 900 },
+      },
+    },
     { name: "phone", use: { ...devices["Pixel 7"], channel: "chrome" } },
   ],
   webServer: {

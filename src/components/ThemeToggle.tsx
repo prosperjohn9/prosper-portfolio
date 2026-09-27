@@ -25,7 +25,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="min-h-9 cursor-pointer whitespace-nowrap rounded-[4px] border border-rule px-3 text-[0.9375rem] hover:border-ink"
+      className="min-h-9 cursor-pointer rounded-[4px] border border-rule px-3 text-[0.9375rem] whitespace-nowrap hover:border-ink"
     >
       {/* On narrow phones only "Dark"/"Light" shows; " theme" stays in the accessible name. */}
       <span className="dark:hidden">
