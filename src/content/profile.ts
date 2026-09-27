@@ -7,9 +7,11 @@ export const profile: Profile = {
   location: "Nigeria",
   pronouns: "He/him",
   email: "prosperjohn9@gmail.com",
+  cvPath: "/Prosper-Osaigbovo-CV.pdf",
   links: {
     linkedin: "https://www.linkedin.com/in/prosperosaigbovo",
     github: "https://github.com/prosperjohn9",
     product: "https://tradershindsight.com",
+    productShowcase: "https://github.com/prosperjohn9/the-traders-hindsight",
   },
 };

@@ -8,10 +8,14 @@ export interface Profile {
   location: string;
   pronouns: string;
   email: string;
+  /** Site path of the CV download. */
+  cvPath: string;
   links: {
     linkedin: string;
     github: string;
     product: string;
+    /** The public repository that documents the product without its code. */
+    productShowcase: string;
   };
 }
 

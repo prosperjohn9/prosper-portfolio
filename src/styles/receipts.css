@@ -1,0 +1,129 @@
+/* Receipts: the marked claims, their numbers, and the notes that prove them. */
+@layer components {
+  /* The reading column and its margin. The margin holds receipts on wide screens. */
+  .margin-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.25rem;
+  }
+  @media (min-width: 1000px) {
+    .margin-row {
+      grid-template-columns: minmax(0, 38rem) minmax(14rem, 17rem);
+      column-gap: 4.5rem;
+      align-items: start;
+    }
+  }
+
+  /* The marker. One highlight behind the claim; on a wrapped claim the stroke
+     runs line by line, like a real highlighter. */
+  .claim {
+    color: var(--on-marker);
+    background-color: transparent;
+    background-image: linear-gradient(var(--marker), var(--marker));
+    background-repeat: no-repeat;
+    background-position: var(--mark-position);
+    background-size: 100% var(--mark-height);
+    padding-inline: 0.06em;
+    margin-inline: -0.06em;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sweep [data-sweep] {
+      animation: marker-sweep 0.75s cubic-bezier(0.55, 0, 0.25, 1) both;
+      animation-delay: var(--sweep-delay, 0s);
+    }
+  }
+
+  /* The receipt number after a claim, and the matching chip on its note. */
+  .cite,
+  .note-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background: var(--marker);
+    color: var(--on-marker);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .cite {
+    min-width: 1.35em;
+    height: 1.35em;
+    padding-inline: 0.3em;
+    margin-left: 0.15em;
+    font-size: 0.62em;
+    vertical-align: 0.55em;
+    text-decoration: none;
+  }
+  .cite:hover {
+    outline: 1px solid var(--on-marker);
+  }
+  .note-number {
+    min-width: 20px;
+    height: 20px;
+    padding-inline: 4px;
+    margin-right: 6px;
+    font-size: 12px;
+    vertical-align: 1px;
+  }
+
+  .notes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--graphite);
+  }
+  .note {
+    margin-bottom: 1.125rem;
+    scroll-margin-block: 1.5rem;
+  }
+  .note-title {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .note:target {
+      animation: note-flash 1.4s ease-out;
+    }
+  }
+
+  /* Phones: receipts sit under the text. With JavaScript they stay closed until
+     their number is tapped; without it, or when linked to, they stay open. */
+  @media (max-width: 999px) {
+    .note {
+      margin-bottom: 0.75rem;
+      padding: 12px 14px;
+      border-radius: 4px;
+      background: var(--panel);
+    }
+    .js .note:not(.is-open, :target) {
+      display: none;
+    }
+    .cite {
+      min-width: 24px;
+      height: 24px;
+      font-size: 13px;
+      vertical-align: 0.3em;
+    }
+  }
+
+  /* The text keeps the page's ink until the stroke passes, so in dark mode a
+     claim is never navy on navy before its highlight arrives. */
+  @keyframes marker-sweep {
+    from {
+      background-size: 0% var(--mark-height);
+      color: var(--ink);
+    }
+    to {
+      background-size: 100% var(--mark-height);
+      color: var(--on-marker);
+    }
+  }
+  @keyframes note-flash {
+    from {
+      box-shadow: -10px 0 0 0 var(--marker);
+    }
+    to {
+      box-shadow: -10px 0 0 0 transparent;
+    }
+  }
+}

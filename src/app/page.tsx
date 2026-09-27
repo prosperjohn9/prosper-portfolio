@@ -1,19 +1,9 @@
-import { profile } from "@/content/profile";
+import { homeProse } from "@/content/home";
+import { receipts } from "@/content/receipts";
+import { numberReceipts } from "@/domain/receipts";
+import { Hero } from "@/sections/Hero";
 
-// The hero name for now. The claims, receipts and sections arrive in later steps.
 export default function Home() {
-  return (
-    <div className="wrap pt-[clamp(28px,6vw,72px)]">
-      <h1 className="t-name">
-        {profile.nameParts.map((part) => (
-          <span key={part} className="block">
-            {part}
-          </span>
-        ))}
-      </h1>
-      <p className="mt-3.5 text-base text-graphite">
-        {profile.role} in {profile.location}. {profile.pronouns}.
-      </p>
-    </div>
-  );
+  const numbering = numberReceipts(receipts, homeProse);
+  return <Hero numbering={numbering} />;
 }
