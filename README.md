@@ -20,16 +20,34 @@ Status: in progress.
 ```
 src/
   app/          routes only: thin pages that compose sections
-  components/   reusable UI, grouped by concern (layout/, ...)
+  sections/     the parts of a page (Hero, ...), each reading its own content
+  components/   reusable UI: layout/ and receipts/
   content/      the words and data on the site, typed by domain/
-  domain/       pure TypeScript: types and logic, no React
-  lib/          infrastructure: the theme script, security headers
+  domain/       pure TypeScript: rich text, receipt numbering, formatting; no React
+  lib/          infrastructure: the head scripts, security headers
+  styles/       component styles that need more than utility classes
+scripts/        the repository counter behind the published figures
 e2e/            Playwright tests, including accessibility checks
 docs/decisions/ architecture decision records
 ```
 
-Dependencies point one way: `app` uses `components`, which use `domain`. Content is plain,
-typed data, so changing a sentence never touches a component.
+Dependencies point one way: `app` composes `sections`, which use `components` and
+`content`, which use `domain`. Content is plain, typed data, so changing a sentence never
+touches a component.
+
+## Receipts
+
+Each claim on the site is highlighted and numbered, and its note says where the proof is.
+Numbers come from where a receipt is first cited on the page (`src/domain/receipts.ts`), so
+they always read in order and cannot drift from the text. On phones the notes open under
+their paragraph; without JavaScript they are simply always shown.
+
+The figures about The Trader's Hindsight come from `src/content/stats.json`, written by a
+script that reads the private repository at a given commit and keeps only the numbers:
+
+```bash
+npm run stats:count -- --repo <path-to-the-product-repo> --rev <commit>
+```
 
 ## Quality gates
 
