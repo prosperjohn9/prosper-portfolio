@@ -1,36 +1,66 @@
-import { MarginRow } from "@/components/layout/MarginRow";
+import Image from "next/image";
+import portrait from "@/assets/portrait.jpg";
 import { Prose } from "@/components/receipts/Prose";
 import { ReceiptNotes } from "@/components/receipts/ReceiptNotes";
-import { hero } from "@/content/home";
+import { ButtonLink, ButtonRow } from "@/components/ui/ButtonLink";
+import { hero, homeBlocks } from "@/content/home";
 import { profile } from "@/content/profile";
 import type { ReceiptId } from "@/content/receipts";
+import { mailto } from "@/domain/links";
 import type { ReceiptNumbering } from "@/domain/receipts";
+import styles from "./Hero.module.css";
 
 export function Hero({ numbering }: { numbering: ReceiptNumbering<ReceiptId> }) {
   return (
-    <section aria-labelledby="hero-name" className="wrap pt-[clamp(28px,6vw,72px)]">
-      <h1 id="hero-name" className="t-name">
-        {profile.nameParts.map((part) => (
-          <span key={part} className="block">
-            {part}
-          </span>
-        ))}
-      </h1>
-      <p className="mt-3.5 mb-7 text-base text-graphite">
-        {profile.role} in {profile.location}. {profile.pronouns}.
-      </p>
+    <section aria-labelledby="hero-name" className={`wrap ${styles.hero}`}>
+      <div className={styles.grid}>
+        <header className={styles.name}>
+          <h1 id="hero-name" className="t-name">
+            {profile.nameParts.map((part) => (
+              <span key={part} className="block">
+                {part}
+              </span>
+            ))}
+          </h1>
+          <p className="mt-3.5 text-base text-graphite">
+            {profile.role} in {profile.location}. {profile.pronouns}.
+          </p>
+        </header>
 
-      {/* Receipts sit right after the paragraph that cites them, so on phones
-          a tapped note opens directly under its claim. */}
-      <MarginRow margin={<ReceiptNotes notes={numbering.notesFor([hero.lede])} />}>
-        <p className="t-lede">
+        <Image
+          src={portrait}
+          alt={hero.portraitAlt}
+          sizes="(min-width: 1000px) 128px, 84px"
+          placeholder="blur"
+          loading="eager"
+          className={styles.photo}
+        />
+
+        {/* Receipts follow the paragraph that cites them, so on phones a tapped
+            note opens directly under its claim. */}
+        <p className={`t-lede ${styles.lede}`}>
           <Prose text={hero.lede} numberOf={numbering.numberOf} sweep />
         </p>
-      </MarginRow>
-      <p className="mt-6 max-w-[34rem] text-graphite">
-        <strong className="font-semibold text-ink">{hero.availability.headline}</strong>{" "}
-        {hero.availability.detail}
-      </p>
+        <div className={`t-small ${styles.notes}`}>
+          <ReceiptNotes notes={numbering.notesFor(homeBlocks.hero)} />
+        </div>
+
+        <div className={styles.rest}>
+          <p className="max-w-[34rem] text-graphite">
+            <strong className="font-semibold text-ink">{hero.availability.headline}</strong>{" "}
+            {hero.availability.detail}
+          </p>
+          <ButtonRow>
+            <ButtonLink href="#evidence" variant="primary">
+              See the evidence
+            </ButtonLink>
+            <ButtonLink href={profile.cvPath} download>
+              Download CV (PDF)
+            </ButtonLink>
+            <ButtonLink href={mailto(profile.email)}>Email me</ButtonLink>
+          </ButtonRow>
+        </div>
+      </div>
     </section>
   );
 }

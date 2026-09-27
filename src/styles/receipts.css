@@ -1,19 +1,5 @@
 /* Receipts: the marked claims, their numbers, and the notes that prove them. */
 @layer components {
-  /* The reading column and its margin. The margin holds receipts on wide screens. */
-  .margin-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 1.25rem;
-  }
-  @media (min-width: 1000px) {
-    .margin-row {
-      grid-template-columns: minmax(0, 38rem) minmax(14rem, 17rem);
-      column-gap: 4.5rem;
-      align-items: start;
-    }
-  }
-
   /* The marker. One highlight behind the claim; on a wrapped claim the stroke
      runs line by line, like a real highlighter. */
   .claim {

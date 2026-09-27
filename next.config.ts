@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   // Pin the project root so a lockfile in a parent folder can never change it.
   outputFileTracingRoot: __dirname,
   poweredByHeader: false,
+  images: {
+    // AVIF where the browser supports it, WebP otherwise.
+    formats: ["image/avif", "image/webp"],
+  },
   async headers() {
     return [
       {

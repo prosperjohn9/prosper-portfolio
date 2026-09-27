@@ -1,0 +1,81 @@
+/* The ledger: the one ruled table on the page, so its lines mean "audited". */
+.table {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.caption {
+  caption-side: bottom;
+  padding-top: 12px;
+  text-align: left;
+  color: var(--graphite);
+  font-size: 0.9375rem;
+}
+.table th {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1.5px solid var(--ink);
+  color: var(--graphite);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: left;
+}
+.table td {
+  padding: 13px 16px 13px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.table th:last-child,
+.table td:last-child {
+  padding-right: 0;
+}
+.figure {
+  text-align: right;
+  white-space: nowrap;
+}
+td.figure {
+  font-size: 1.125rem;
+  font-weight: 750;
+  font-stretch: 110%;
+}
+.source {
+  color: var(--graphite);
+}
+
+/* Phones: each row becomes a small card of what, figure and source. */
+@media (max-width: 759px) {
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+  }
+  .table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .table td {
+    padding: 0;
+    border: 0;
+  }
+  .what {
+    font-weight: 600;
+  }
+  td.figure {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .source {
+    grid-column: 1 / -1;
+    font-size: 0.9375rem;
+  }
+}

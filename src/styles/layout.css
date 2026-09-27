@@ -1,0 +1,42 @@
+/* Page layout: the content width, section rhythm, the reading column with its
+   margin, and the plate screenshots are mounted on. */
+@layer components {
+  .wrap {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  @media (min-width: 720px) {
+    .wrap {
+      padding-inline: 40px;
+    }
+  }
+
+  .section {
+    padding-top: clamp(72px, 9vw, 120px);
+    scroll-margin-top: 8px;
+  }
+
+  /* A reading column with a margin for receipts on wide screens. */
+  .margin-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.25rem;
+  }
+  @media (min-width: 1000px) {
+    .margin-row {
+      grid-template-columns: var(--column-reading) var(--column-margin);
+      column-gap: var(--column-gap);
+      align-items: start;
+    }
+  }
+
+  /* Screenshots of the dark app sit on the night plate in both themes. */
+  .plate {
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--plate-edge);
+    border-radius: 6px;
+    background: var(--plate);
+  }
+}

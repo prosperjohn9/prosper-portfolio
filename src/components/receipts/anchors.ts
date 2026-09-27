@@ -1,3 +1,2 @@
-/** Element ids that link a claim's number to its note and back. */
+/** The element id of a receipt's note, so every number that cites it can link there. */
 export const noteId = (receiptId: string) => `receipt-${receiptId}`;
-export const citeId = (receiptId: string) => `cites-${receiptId}`;

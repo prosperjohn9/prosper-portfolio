@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "../styles/typography.css";
+@import "../styles/layout.css";
 @import "../styles/receipts.css";
 
 /* `dark:` follows the device setting, unless the visitor picked a theme with
@@ -32,6 +34,10 @@
   --focus: #14213d;
   --button: #14213d;
   --button-text: #f4f6f3;
+  /* The reading column, its margin for receipts, and the gap between them. */
+  --column-reading: minmax(0, 38rem);
+  --column-margin: minmax(14rem, 17rem);
+  --column-gap: 4.5rem;
   color-scheme: light;
 }
 
@@ -100,7 +106,10 @@
     line-height: 1.6;
     font-variant-numeric: tabular-nums lining-nums;
   }
+  /* Links in running text are underlined, so they never rely on colour alone.
+     Navigation and buttons opt out with no-underline. */
   a {
+    text-decoration-line: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.18em;
   }
@@ -111,55 +120,5 @@
     outline: 2px solid var(--focus);
     outline-offset: 3px;
     border-radius: 2px;
-  }
-}
-
-/* Type roles. Archivo's width axis carries the hierarchy: one family,
-   wide for the name and headings, normal width for reading. */
-@layer components {
-  .wrap {
-    max-width: 68rem;
-    margin-inline: auto;
-    padding-inline: 16px;
-  }
-  @media (min-width: 720px) {
-    .wrap {
-      padding-inline: 40px;
-    }
-  }
-  .t-brand {
-    font-weight: 800;
-    font-stretch: 118%;
-    font-size: 1.0625rem;
-    letter-spacing: -0.005em;
-  }
-  .t-name {
-    font-weight: 800;
-    font-stretch: 118%;
-    font-size: clamp(2.1rem, 8.6vw, 4.75rem);
-    line-height: 0.94;
-    letter-spacing: -0.02em;
-  }
-  .t-h2 {
-    font-weight: 750;
-    font-stretch: 112%;
-    font-size: clamp(1.7rem, 3.4vw, 2.35rem);
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-  }
-  .t-h3 {
-    font-weight: 700;
-    font-stretch: 108%;
-    font-size: 1.15rem;
-    line-height: 1.25;
-  }
-  .t-lede {
-    font-size: clamp(1.18rem, 2.3vw, 1.5rem);
-    line-height: 1.5;
-    font-weight: 450;
-  }
-  .t-small {
-    font-size: 0.9375rem;
-    line-height: 1.5;
   }
 }

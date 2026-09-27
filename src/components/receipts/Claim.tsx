@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { citeId, noteId } from "@/components/receipts/anchors";
+import { Cite } from "@/components/receipts/Cite";
 
 interface ClaimProps {
   receiptId: string;
@@ -13,35 +13,19 @@ interface ClaimProps {
 const SWEEP_START_S = 0.35;
 const SWEEP_GAP_S = 0.7;
 
-/**
- * A highlighted claim and the number of its receipt. The number is a plain link
- * to the note, so it works without JavaScript; on phones a script turns it into
- * a toggle that opens the note in place.
- */
+/** A highlighted claim followed by the number of its receipt. */
 export function Claim({ receiptId, number, sweepOrder, children }: ClaimProps) {
-  const sweepStyle =
-    sweepOrder === undefined
-      ? undefined
-      : ({ "--sweep-delay": `${SWEEP_START_S + sweepOrder * SWEEP_GAP_S}s` } as CSSProperties);
+  const sweeps = sweepOrder !== undefined;
+  const sweepStyle = sweeps
+    ? ({ "--sweep-delay": `${SWEEP_START_S + sweepOrder * SWEEP_GAP_S}s` } as CSSProperties)
+    : undefined;
 
   return (
     <>
-      <mark
-        className="claim"
-        data-sweep={sweepOrder === undefined ? undefined : ""}
-        style={sweepStyle}
-      >
+      <mark className="claim" data-sweep={sweeps ? "" : undefined} style={sweepStyle}>
         {children}
       </mark>
-      <a
-        className="cite"
-        href={`#${noteId(receiptId)}`}
-        id={citeId(receiptId)}
-        aria-label={`Receipt ${number}`}
-        data-cite=""
-      >
-        {number}
-      </a>
+      <Cite receiptId={receiptId} number={number} />
     </>
   );
 }
