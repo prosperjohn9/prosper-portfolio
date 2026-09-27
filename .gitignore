@@ -49,5 +49,8 @@ next-env.d.ts
 /CLAUDE.md
 /.claude/
 
+# local tool data
+/.remember/
+
 # the counted repository's folder layout stays private
 /scripts/repo-layout.local.mts
