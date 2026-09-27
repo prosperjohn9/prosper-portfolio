@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { profile } from "@/content/profile";
 import { fullName } from "@/domain/profile";
+import { enhanceScript } from "@/lib/enhance";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -24,8 +25,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={archivo.variable} suppressHydrationWarning>
       <head>
-        {/* Static string from lib/theme; applies the saved theme before first paint. */}
+        {/* Fixed strings from lib/, run before first paint: the theme, then the
+            receipts enhancement. Neither reads anything from the request. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: enhanceScript }} />
       </head>
       <body className="antialiased">
         <a
