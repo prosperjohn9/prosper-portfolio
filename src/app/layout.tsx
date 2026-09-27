@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { profile } from "@/content/profile";
+import { fullName } from "@/domain/profile";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -14,15 +16,15 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Prosper Osaigbovo, full stack software engineer",
-  description:
-    "Prosper Chukwuemeke Osaigbovo, full stack software engineer in Nigeria. Founder of The Trader's Hindsight. Every claim on this site links to its proof.",
+  title: `${profile.shortName}, ${profile.role.toLowerCase()}`,
+  description: `${fullName(profile)}, ${profile.role.toLowerCase()} in ${profile.location}. Founder of The Trader's Hindsight. Every claim on this site links to its proof.`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={archivo.variable} suppressHydrationWarning>
       <head>
+        {/* Static string from lib/theme; applies the saved theme before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="antialiased">

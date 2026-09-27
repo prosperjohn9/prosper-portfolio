@@ -1,15 +1,18 @@
-// Step 1 shell: the hero name only. The claims, receipts and sections arrive
-// in steps 2 and 3.
+import { profile } from "@/content/profile";
+
+// The hero name for now. The claims, receipts and sections arrive in later steps.
 export default function Home() {
   return (
     <div className="wrap pt-[clamp(28px,6vw,72px)]">
       <h1 className="t-name">
-        <span className="block">Prosper</span>
-        <span className="block">Chukwuemeke</span>
-        <span className="block">Osaigbovo</span>
+        {profile.nameParts.map((part) => (
+          <span key={part} className="block">
+            {part}
+          </span>
+        ))}
       </h1>
       <p className="mt-3.5 text-base text-graphite">
-        Full stack software engineer in Nigeria. He/him.
+        {profile.role} in {profile.location}. {profile.pronouns}.
       </p>
     </div>
   );
