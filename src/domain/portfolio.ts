@@ -19,14 +19,14 @@ export interface LedgerRow {
   source: RichText<never>;
 }
 
-/** A degree, or another dated step, newest first. */
+/** A job or a degree, newest first. */
 export interface Milestone {
   period: string;
   title: string;
   detail?: string;
 }
 
-/** Something I built or worked on: a product, a client site or a job. */
+/** Something I built, as the Selected work list shows it. */
 export interface Project {
   /** Stable and URL-safe: it keys the list, and names the project's page when it has one. */
   slug: string;

@@ -8,6 +8,7 @@ export interface NavItem {
 export const sectionNav: readonly NavItem[] = [
   { id: "work", label: "Work" },
   { id: "how-i-work", label: "How I work" },
+  { id: "experience", label: "Experience" },
 ];
 
 /** Always visible, on every screen size. */

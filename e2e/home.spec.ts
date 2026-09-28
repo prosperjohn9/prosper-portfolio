@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-const SECTIONS = ["work", "how-i-work", "education", "contact"];
+const SECTIONS = ["work", "how-i-work", "experience", "contact"];
 
 test("the sections appear in order, each with a heading", async ({ page }) => {
   await page.goto("/");
@@ -58,7 +58,7 @@ test("Selected work leads to the case study and to each live site", async ({ pag
     "href",
     "/work/traders-hindsight",
   );
-  for (const site of ["tradershindsight.com", "goldencrestservices.com", "isilens.co.uk"]) {
+  for (const site of ["tradershindsight.com", "isilens.co.uk"]) {
     await expect(work.getByRole("link", { name: site })).toHaveAttribute("href", `https://${site}`);
   }
 });

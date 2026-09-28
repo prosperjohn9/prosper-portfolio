@@ -2,7 +2,7 @@ import { homeProse } from "@/content/home";
 import { receipts } from "@/content/receipts";
 import { numberReceipts } from "@/domain/receipts";
 import { Contact } from "@/sections/Contact";
-import { Education } from "@/sections/Education";
+import { Experience } from "@/sections/Experience";
 import { Hero } from "@/sections/Hero";
 import { HowIWork } from "@/sections/HowIWork";
 import { SelectedWork } from "@/sections/SelectedWork";
@@ -15,7 +15,7 @@ export default function Home() {
       <Hero numbering={numbering} />
       <SelectedWork />
       <HowIWork numbering={numbering} />
-      <Education />
+      <Experience />
       <Contact />
     </>
   );

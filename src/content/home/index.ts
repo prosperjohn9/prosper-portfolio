@@ -4,7 +4,7 @@ import { hero } from "@/content/home/hero";
 import { howIWork } from "@/content/home/how-i-work";
 
 export { contact } from "@/content/home/contact";
-export { education } from "@/content/home/education";
+export { experience } from "@/content/home/experience";
 export { hero } from "@/content/home/hero";
 export { howIWork } from "@/content/home/how-i-work";
 export { work } from "@/content/home/work";
