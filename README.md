@@ -20,7 +20,7 @@ Hindsight at `/work/traders-hindsight` with a working demo of its core idea.
 
 ```
 src/
-  app/          routes only: the home page, and /work/[slug] for every project page
+  app/          routes only: the home page, /work/[slug] and /notes/[slug]
   sections/     the parts of a page (Hero, SelectedWork, HowIWork, ...), each reading its
                 content; sections/case-study/ renders any project's page
   components/   reusable UI: layout/, receipts/, figures/, hindsight-demo/ and ui/
@@ -51,6 +51,12 @@ blocks: text, features, rules, figures, steps, a ledger, buttons, or a demo pane
 that follow each other share the reading column with their receipts in the margin; the rest
 take the full width. Slugs without a case study return 404. The Trader's Hindsight, in
 `src/content/projects/traders-hindsight/`, is the worked example.
+
+## Adding a note
+
+A note is one file in `src/content/notes/`, typed by `Note` in `src/domain/note.ts`: a title,
+the date it was first posted, a link to the original, and its paragraphs. Adding it to the list
+in `src/content/notes/index.ts` gives it a page at `/notes/<slug>`.
 
 ## Receipts
 
