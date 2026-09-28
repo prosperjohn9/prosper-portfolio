@@ -6,8 +6,8 @@ export interface Feature<Id extends string = string> {
   description: RichText<Id>;
 }
 
-/** A security rule the product keeps, and why it matters. */
-export interface SecurityRule<Id extends string = string> {
+/** A rule the product keeps, such as a security or design decision, and why it matters. */
+export interface ProductRule<Id extends string = string> {
   rule: string;
   reason: RichText<Id>;
 }
@@ -31,4 +31,16 @@ export interface ClientProject {
   name: string;
   href: string;
   description: string;
+}
+
+/** A short labelled fact, such as a role or a price. */
+export interface Fact {
+  term: string;
+  detail: string;
+}
+
+/** One step of a pipeline, in the order the steps run. */
+export interface PipelineStep {
+  name: string;
+  detail?: string;
 }

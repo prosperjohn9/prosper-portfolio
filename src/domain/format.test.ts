@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { approximately, formatCount, formatDate } from "@/domain/format";
+import { approximately, formatCount, formatDate, formatMoney } from "@/domain/format";
 
 describe("formatCount", () => {
   it("groups thousands with commas", () => {
@@ -28,5 +28,22 @@ describe("formatDate", () => {
   it("rejects anything that is not a calendar date", () => {
     expect(() => formatDate("27/09/2026")).toThrow();
     expect(() => formatDate("2026-13-01")).toThrow();
+  });
+});
+
+describe("formatMoney", () => {
+  it("uses a true minus sign and groups thousands", () => {
+    expect(formatMoney(-4428)).toBe("\u2212$4,428");
+    expect(formatMoney(670)).toBe("$670");
+  });
+
+  it("adds a plus sign to gains when asked", () => {
+    expect(formatMoney(60, { signed: true })).toBe("+$60");
+    expect(formatMoney(0, { signed: true })).toBe("$0");
+  });
+
+  it("shows cents only when there are some", () => {
+    expect(formatMoney(-33.33)).toBe("\u2212$33.33");
+    expect(formatMoney(12.5)).toBe("$12.50");
   });
 });
