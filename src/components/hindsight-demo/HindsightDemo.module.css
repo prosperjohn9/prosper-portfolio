@@ -1,0 +1,315 @@
+/* The demo is an exhibit: it sits on the night plate in both themes, like the
+   screenshots. Green and red appear only on P&L, as in the product. */
+.panel {
+  --demo-text: #e6eaf2;
+  --demo-muted: #9aa5bd;
+  --demo-rule: #2a3650;
+  --gain: #4fd18b;
+  --loss: #ff8a80;
+  --focus: var(--marker);
+  margin: 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid var(--plate-edge);
+  border-radius: 6px;
+  background: var(--plate);
+  color: var(--demo-text);
+}
+
+/* Parts that only work with JavaScript, and what shows instead without it. */
+:global(html:not(.js)) .needsScript,
+:global(html.js) .withoutScript {
+  display: none;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 20px;
+}
+.title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.3;
+}
+.example {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.body {
+  display: grid;
+  gap: 28px;
+  margin-top: 20px;
+}
+@media (min-width: 880px) {
+  .body {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    column-gap: 44px;
+  }
+}
+
+.totalLabel {
+  margin: 0;
+  color: var(--demo-muted);
+  font-size: 0.9375rem;
+}
+.total {
+  margin: 4px 0 0;
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.total[data-sign="loss"] {
+  color: var(--loss);
+}
+.total[data-sign="gain"] {
+  color: var(--gain);
+}
+.asTraded {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  color: var(--demo-muted);
+  font-size: 0.9375rem;
+}
+.asTraded s {
+  text-decoration-thickness: 1.5px;
+}
+.sentence {
+  min-height: 3.2em;
+  margin: 2px 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* The chart: one column per trade, bars growing up or down from zero. A trade
+   taken out keeps its place as a dashed outline. */
+.chart {
+  display: flex;
+  gap: 4px;
+  margin-top: 18px;
+}
+.column {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+.plot {
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
+@media (min-width: 880px) {
+  .plot {
+    height: 150px;
+  }
+}
+.plot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  left: -2px;
+  border-top: 1px solid var(--demo-muted);
+}
+.bar,
+.ghost {
+  position: absolute;
+  right: 16%;
+  left: 16%;
+  height: var(--bar);
+  border-radius: 1px;
+}
+.bar[data-side="gain"],
+.ghost[data-side="gain"] {
+  bottom: 50%;
+}
+.bar[data-side="loss"],
+.ghost[data-side="loss"] {
+  top: 50%;
+}
+.bar[data-side="gain"] {
+  background: var(--gain);
+}
+.bar[data-side="loss"] {
+  background: var(--loss);
+}
+.ghost {
+  border: 1.5px dashed var(--demo-muted);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bar {
+    transition: height 0.32s cubic-bezier(0.3, 0.7, 0.3, 1);
+  }
+}
+.column[data-flagged] .bar,
+.column[data-flagged] .ghost {
+  outline: 2px solid var(--demo-text);
+  outline-offset: 2px;
+}
+.day {
+  margin-top: 6px;
+  color: var(--demo-muted);
+  font-size: 11px;
+  line-height: 1;
+}
+.tags {
+  min-height: 14px;
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.caption {
+  margin: 10px 0 0;
+  color: var(--demo-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* The habits, ranked by what they cost. Taking one out strikes it through,
+   like correcting a line on a statement. */
+.habits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--demo-rule);
+}
+.habit {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--demo-rule);
+}
+.key {
+  display: inline-grid;
+  grid-row: span 2;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border: 1.5px solid var(--demo-text);
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+.habitName {
+  grid-row: span 2;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.habit[data-out] .habitName {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+.cost {
+  color: var(--loss);
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+.button {
+  justify-self: end;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1.5px solid var(--demo-text);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--demo-text);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.button:hover,
+.habit[data-out] .button {
+  background: var(--demo-text);
+  color: var(--plate);
+}
+.footnote {
+  margin: 14px 0 0;
+  color: var(--demo-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.reset {
+  min-height: 24px;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--demo-text);
+  font: inherit;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+.reset:disabled {
+  color: var(--demo-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Every trade, as a table: the same data as the chart, for reading or a screen reader. */
+.trades {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--demo-rule);
+}
+.trades summary {
+  width: fit-content;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tableScroll {
+  margin-top: 10px;
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.table th,
+.table td {
+  padding: 7px 14px 7px 0;
+  text-align: left;
+  white-space: nowrap;
+}
+.table th {
+  border-bottom: 1.5px solid var(--demo-text);
+  color: var(--demo-muted);
+  font-weight: 600;
+}
+.table td {
+  border-bottom: 1px solid var(--demo-rule);
+}
+.table th:last-child,
+.table td:last-child {
+  padding-right: 0;
+}
+.table .number {
+  text-align: right;
+}
+.table tr[data-taken-out] td {
+  color: var(--demo-muted);
+}
+.table tr[data-taken-out] td:not(:last-child) {
+  text-decoration: line-through;
+}
