@@ -1,16 +1,15 @@
 import { ScreenshotFigure } from "@/components/figures/ScreenshotFigure";
+import { FULL_WIDTH, HALF_WIDTH } from "@/components/figures/sizes";
 import { MarginRow } from "@/components/layout/MarginRow";
 import { Section } from "@/components/layout/Section";
 import { Prose } from "@/components/receipts/Prose";
 import { ReceiptNotes } from "@/components/receipts/ReceiptNotes";
+import { ButtonLink, ButtonRow } from "@/components/ui/ButtonLink";
 import { evidence, homeBlocks } from "@/content/home";
 import type { ReceiptId } from "@/content/receipts";
 import { screenshots } from "@/content/screenshots";
+import { routes } from "@/content/site";
 import type { ReceiptNumbering } from "@/domain/receipts";
-
-// Rendered widths, so the browser downloads the smallest image that is sharp.
-const FULL_WIDTH = "(min-width: 1088px) 1008px, (min-width: 720px) calc(100vw - 80px), 100vw";
-const HALF_WIDTH = "(min-width: 1088px) 490px, (min-width: 768px) calc(50vw - 54px), 100vw";
 
 export function Evidence({ numbering }: { numbering: ReceiptNumbering<ReceiptId> }) {
   return (
@@ -48,6 +47,11 @@ export function Evidence({ numbering }: { numbering: ReceiptNumbering<ReceiptId>
       <div className="mt-9">
         <ScreenshotFigure shot={screenshots.hindsight} sizes={FULL_WIDTH} />
       </div>
+      <ButtonRow>
+        <ButtonLink href={routes.caseStudy} variant="primary">
+          Read the case study
+        </ButtonLink>
+      </ButtonRow>
     </Section>
   );
 }

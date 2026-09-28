@@ -14,6 +14,14 @@
     line-height: 0.94;
     letter-spacing: -0.02em;
   }
+  /* A page title below the name's size, such as a case study's. */
+  .t-title {
+    font-weight: 800;
+    font-stretch: 118%;
+    font-size: clamp(2.1rem, 6.4vw, 3.9rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
   .t-h2 {
     font-weight: 750;
     font-stretch: 112%;

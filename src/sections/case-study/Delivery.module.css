@@ -1,0 +1,70 @@
+/* The pipeline: a real sequence, so its steps are numbered. Down the page on
+   phones, across it on wide screens. */
+.steps {
+  display: grid;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+.step {
+  position: relative;
+  padding: 0 0 18px 40px;
+  counter-increment: step;
+}
+.step::before {
+  content: counter(step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+/* The line that joins each step to the next. */
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  bottom: 4px;
+  left: 12px;
+  border-left: 2px solid var(--rule);
+}
+.name {
+  display: block;
+  font-weight: 700;
+  line-height: 26px;
+}
+.detail {
+  display: block;
+  color: var(--graphite);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+@media (min-width: 900px) {
+  .steps {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+  .step {
+    padding: 38px 0 0;
+  }
+  .step:not(:last-child)::after {
+    top: 12px;
+    right: -12px;
+    bottom: auto;
+    left: 34px;
+    border-top: 2px solid var(--rule);
+    border-left: 0;
+  }
+  .name {
+    line-height: 1.35;
+  }
+}

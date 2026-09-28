@@ -35,7 +35,7 @@ export function Ledger() {
       </table>
       <ButtonRow>
         <ButtonLink href={mailto(profile.email, contact.walkthroughSubject)} variant="primary">
-          Ask for a code walkthrough
+          Ask how it is built
         </ButtonLink>
         <ButtonLink href={profile.links.productShowcase}>
           See the public showcase on GitHub
