@@ -17,7 +17,8 @@ const fakeWindow = {
 
 const PAGE = `
   <p>A claim <a data-cite href="#receipt-a" id="cite">1</a></p>
-  <ol><li id="receipt-a" class="note">Proof</li></ol>`;
+  <ol><li id="receipt-a" class="note">Proof</li></ol>
+  <p>The same proof again <a data-cite href="#receipt-a" id="again">1</a></p>`;
 
 /** A fresh page load: a new document, then the shipped script, then DOMContentLoaded. */
 function load(): Document {
@@ -93,6 +94,21 @@ describe("receipt numbers", () => {
     expect(click()).toBe(true);
     expect(note.classList.contains("is-open")).toBe(false);
     expect(cite.hasAttribute("aria-expanded")).toBe(false);
+  });
+
+  it("cited again below their note, jump up to it and leave it open", () => {
+    media.narrow = true;
+    const page = load();
+    const again = page.getElementById("again")!;
+    const note = page.getElementById("receipt-a")!;
+    expect(again.hasAttribute("aria-expanded")).toBe(false);
+    const followed = again.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    expect(followed).toBe(true);
+    expect(note.classList.contains("is-open")).toBe(true);
+    // The number that opens the note in place now says it is open.
+    expect(page.getElementById("cite")!.getAttribute("aria-expanded")).toBe("true");
   });
 
   it("register their handlers once, even if the script runs twice", () => {

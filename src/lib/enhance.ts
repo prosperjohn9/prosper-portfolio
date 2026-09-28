@@ -11,7 +11,9 @@ const SWEEP_CLEANUP_MS = 3000;
  * - plays the marker sweep once per visit, never with reduced motion, and sets
  *   the class before paint so the highlights never flash in and out;
  * - on narrow screens, turns each receipt number into a toggle for its note.
- *   Without JavaScript the numbers stay plain links and every note stays visible.
+ *   A number cited again further down, after its note, stays a link that jumps
+ *   up to the note and leaves it open. Without JavaScript the numbers stay
+ *   plain links and every note stays visible.
  */
 export const enhanceScript = `(function () {
   var root = document.documentElement;
@@ -35,9 +37,13 @@ export const enhanceScript = `(function () {
   function noteFor(cite) {
     return document.getElementById((cite.getAttribute("href") || "").slice(1));
   }
+  // A note opens in place under the text that first cites it, which comes before it.
+  function opensInPlace(cite, note) {
+    return !!note && (cite.compareDocumentPosition(note) & 4) !== 0;
+  }
   function sync(cite) {
     var note = noteFor(cite);
-    if (narrow.matches && note) {
+    if (narrow.matches && opensInPlace(cite, note)) {
       cite.setAttribute("aria-controls", note.id);
       cite.setAttribute("aria-expanded", String(note.classList.contains("is-open")));
     } else {
@@ -62,6 +68,12 @@ export const enhanceScript = `(function () {
     if (!cite || !narrow.matches) return;
     var note = noteFor(cite);
     if (!note) return;
+    if (!opensInPlace(cite, note)) {
+      // Follow the link up to the note, and keep it open once the reader is there.
+      note.classList.add("is-open");
+      syncAll();
+      return;
+    }
     event.preventDefault();
     note.classList.toggle("is-open");
     sync(cite);
