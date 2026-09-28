@@ -5,7 +5,8 @@ The source of my personal site. I am a full stack software engineer and the foun
 the site is built around evidence: each claim it makes carries a note saying where the proof
 is and when it was checked.
 
-Status: in progress.
+Status: in progress. Two pages so far: the home page, and a case study of The Trader's
+Hindsight at `/work/traders-hindsight` with a working demo of its core idea.
 
 ## Stack
 
@@ -20,10 +21,12 @@ Status: in progress.
 ```
 src/
   app/          routes only: thin pages that compose sections
-  sections/     the parts of a page (Hero, Evidence, Ledger, ...), each reading its content
-  components/   reusable UI: layout/, receipts/, figures/ and ui/
+  sections/     the parts of a page (Hero, Evidence, Ledger, ...), each reading its content;
+                the case study's are in sections/case-study/
+  components/   reusable UI: layout/, receipts/, figures/, hindsight-demo/ and ui/
   content/      the words and data on the site, typed by domain/
-  domain/       pure TypeScript: rich text, receipt numbering, formatting; no React
+  domain/       pure TypeScript: rich text, receipt numbering, formatting, the Hindsight
+                rules; no React
   lib/          infrastructure: the head scripts, security headers
   styles/       component styles that need more than utility classes
 scripts/        the repository counter behind the published figures
@@ -39,8 +42,9 @@ touches a component.
 
 Each claim on the site is highlighted and numbered, and its note says where the proof is.
 Numbers come from where a receipt is first cited on the page (`src/domain/receipts.ts`), so
-they always read in order and cannot drift from the text. On phones the notes open under
-their paragraph; without JavaScript they are simply always shown.
+they always read in order and cannot drift from the text. Each page numbers its own. On phones
+the notes open under their paragraph, and a number cited again further down jumps up to its
+note; without JavaScript the notes are simply always shown.
 
 The figures about The Trader's Hindsight come from `src/content/stats.json`, written by a
 script that reads the private repository at a given commit and keeps only the numbers:
@@ -48,6 +52,15 @@ script that reads the private repository at a given commit and keeps only the nu
 ```bash
 npm run stats:count -- --repo <path-to-the-product-repo> --rev <commit>
 ```
+
+## The Hindsight demo
+
+The case study shows the product's idea on 15 made-up trades: take a habit out and the month is
+replayed without it, then the habits are ranked by what they cost. Each example trade comes
+labelled with its habits, so the site holds none of the product's rules; `src/domain/hindsight.ts`
+only replays and ranks. `src/content/case-study/case-study.test.ts` checks that the example month
+tells the story the page promises. The panel is a small client component inside a static page.
+Its first render is complete HTML, so without JavaScript it still shows the costs and every trade.
 
 ## Quality gates
 
