@@ -21,12 +21,13 @@ Hindsight at `/work/traders-hindsight` with a working demo of its core idea.
 ```
 src/
   app/          routes only: thin pages that compose sections
-  sections/     the parts of a page (Hero, Evidence, Ledger, ...), each reading its content;
-                the case study's are in sections/case-study/
+  sections/     the parts of a page (Hero, SelectedWork, HowIWork, ...), each reading its
+                content; the case study's are in sections/case-study/
   components/   reusable UI: layout/, receipts/, figures/, hindsight-demo/ and ui/
-  content/      the words and data on the site, typed by domain/
+  content/      the words and data on the site, typed by domain/; one file per project
+                in content/projects/
   domain/       pure TypeScript: rich text, receipt numbering, formatting, the Hindsight
-                rules; no React
+                replay; no React
   lib/          infrastructure: the head scripts, security headers
   styles/       component styles that need more than utility classes
 scripts/        the repository counter behind the published figures
