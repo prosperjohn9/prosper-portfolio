@@ -50,11 +50,7 @@ export const demo = {
     habits: {
       revenge: { key: "R", name: "Revenge trades after a loss", phrase: "revenge trades" },
       sizing: { key: "S", name: "Sizing up after a loss", phrase: "sizing up after a loss" },
-      tilt: {
-        key: "T",
-        name: "Third trade after two losses",
-        phrase: "third trades after two losses",
-      },
+      tilt: { key: "T", name: "Tilt", phrase: "trades on tilt" },
     } satisfies Record<HabitId, HabitCopy>,
   },
   /** The real report, shown after the demo. */

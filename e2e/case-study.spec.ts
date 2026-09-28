@@ -57,7 +57,7 @@ test.describe("the Hindsight demo", () => {
     );
     await expect(panel(page)).toContainText("As traded: −$610");
 
-    await takeOut(page, "third trades after two losses").click();
+    await takeOut(page, "trades on tilt").click();
     await expect(total(page)).toHaveText("+$240");
     await expect(panel(page)).toContainText("the month is $850 better");
 
