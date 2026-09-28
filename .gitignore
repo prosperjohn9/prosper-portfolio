@@ -54,3 +54,6 @@ next-env.d.ts
 
 # the counted repository's folder layout stays private
 /scripts/repo-layout.local.mts
+
+# words that would give the product's logic away (see e2e/case-study.spec.ts)
+/e2e/private-terms.local.txt

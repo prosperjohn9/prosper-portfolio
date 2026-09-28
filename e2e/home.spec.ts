@@ -62,11 +62,11 @@ test("the ledger shows the figures exactly as counted", async ({ page }) => {
   await expect(ledger).toContainText(`at commit ${stats.commit}`);
 });
 
-test("the code walkthrough email arrives with its subject", async ({ page }) => {
+test("the call request arrives with its subject", async ({ page }) => {
   await page.goto("/");
-  const walkthrough = page.getByRole("link", { name: "Ask for a code walkthrough" });
-  await expect(walkthrough).toHaveAttribute(
+  const ask = page.getByRole("link", { name: "Ask how it is built" });
+  await expect(ask).toHaveAttribute(
     "href",
-    /^mailto:prosperjohn9@gmail\.com\?subject=Code%20walkthrough/,
+    /^mailto:prosperjohn9@gmail\.com\?subject=How%20The%20Trader/,
   );
 });
