@@ -1,11 +1,6 @@
 import { formatDate } from "@/domain/format";
 import { stats } from "@/content/stats";
 
-/** Pages other than the home page. */
-export const routes = {
-  caseStudy: "/work/traders-hindsight",
-};
-
 /** Lines every page ends with. */
 export const footerNotes = [
   "No real trader data appears on this site: screenshots use fixture data, a test account or the public landing page.",

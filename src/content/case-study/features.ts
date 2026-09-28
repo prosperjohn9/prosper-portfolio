@@ -1,15 +1,9 @@
 import type { Feature } from "@/domain/portfolio";
-import type { RichText } from "@/domain/rich-text";
 import type { ReceiptId } from "@/content/receipts";
 
-export const evidence = {
-  title: "The Trader's Hindsight",
-  story: [
-    "From June 2025 to September 2026 I took 20 prop-firm challenges across four firms. ",
-    { claim: "I ended $4,428 down after refunds and was never funded", receipt: "founder-story" },
-    ". So I built the tool I wished I had: a trading journal that shows traders which habits cost them money, and what they saved by stopping.",
-  ] satisfies RichText<ReceiptId>,
-  features: [
+export const features = {
+  title: "What it does",
+  items: [
     {
       name: "Hindsight",
       description: [
@@ -54,5 +48,4 @@ export const evidence = {
       ],
     },
   ] satisfies Feature<ReceiptId>[],
-  stack: "Built with Next.js 16, React 19, TypeScript and Supabase (PostgreSQL).",
 };

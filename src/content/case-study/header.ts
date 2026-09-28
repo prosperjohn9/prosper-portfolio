@@ -1,9 +1,10 @@
 import type { Fact } from "@/domain/portfolio";
 import type { RichText } from "@/domain/rich-text";
 import type { ReceiptId } from "@/content/receipts";
+import { tradersHindsight } from "@/content/projects";
 
 export const header = {
-  title: "The Trader's Hindsight",
+  title: tradersHindsight.name,
   lede: [
     "A trading journal that shows forex and prop-firm traders, in money, what their habits cost them. ",
     { claim: "I designed, built and run it on my own", receipt: "git-history" },
@@ -12,13 +13,10 @@ export const header = {
     ".",
   ] satisfies RichText<ReceiptId>,
   facts: [
-    { term: "Role", detail: "Founder and only engineer" },
-    { term: "Built", detail: "December 2025 to now" },
+    { term: "Role", detail: tradersHindsight.role },
+    { term: "Built", detail: tradersHindsight.period },
     { term: "Price", detail: "From $12 a month" },
-    {
-      term: "Stack",
-      detail: "Next.js 16, React 19, TypeScript, Supabase (PostgreSQL), Node.js",
-    },
+    { term: "Stack", detail: tradersHindsight.stack.join(", ") },
   ] satisfies Fact[],
 };
 

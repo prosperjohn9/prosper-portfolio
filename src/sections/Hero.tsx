@@ -6,7 +6,6 @@ import { ButtonLink, ButtonRow } from "@/components/ui/ButtonLink";
 import { hero, homeBlocks } from "@/content/home";
 import { profile } from "@/content/profile";
 import type { ReceiptId } from "@/content/receipts";
-import { routes } from "@/content/site";
 import { mailto } from "@/domain/links";
 import type { ReceiptNumbering } from "@/domain/receipts";
 import styles from "./Hero.module.css";
@@ -52,10 +51,7 @@ export function Hero({ numbering }: { numbering: ReceiptNumbering<ReceiptId> }) 
             {hero.availability.detail}
           </p>
           <ButtonRow>
-            <ButtonLink href={routes.caseStudy} variant="primary">
-              Read the case study
-            </ButtonLink>
-            <ButtonLink href={profile.cvPath} download>
+            <ButtonLink href={profile.cvPath} variant="primary" download>
               Download CV (PDF)
             </ButtonLink>
             <ButtonLink href={mailto(profile.email)}>Email me</ButtonLink>

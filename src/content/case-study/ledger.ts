@@ -9,7 +9,7 @@ const site = { text: "tradershindsight.com", href: profile.links.product };
 export const ledger = {
   title: "The numbers, and where they come from",
   intro:
-    "Every figure on this page, with its source. The repository figures are counted by a script from the private code.",
+    "Every figure about the product, with its source. The repository figures are counted by a script from the private code.",
   caption: `Repository figures counted on ${formatDate(stats.countedOn)}, at commit ${stats.commit}.`,
   rows: [
     {
@@ -38,16 +38,6 @@ export const ledger = {
       what: "My net result after refunds",
       figure: "−$4,428",
       source: ["Founder story, ", site],
-    },
-    {
-      what: "Active users of the cloud apps I worked on at QuantumEdge",
-      figure: "250,000+",
-      source: [
-        "Employer figure, on ",
-        { text: "LinkedIn", href: profile.links.linkedin },
-        " and my ",
-        { text: "CV", href: profile.cvPath },
-      ],
     },
   ] satisfies LedgerRow[],
 };

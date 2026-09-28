@@ -14,6 +14,9 @@ export function Walkthrough() {
           Ask how it is built
         </ButtonLink>
         <ButtonLink href={profile.links.product}>Open tradershindsight.com</ButtonLink>
+        <ButtonLink href={profile.links.productShowcase}>
+          See the public showcase on GitHub
+        </ButtonLink>
         <ButtonLink href={profile.cvPath} download>
           Download CV (PDF)
         </ButtonLink>

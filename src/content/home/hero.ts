@@ -1,26 +1,22 @@
-import { formatCount } from "@/domain/format";
 import type { RichText } from "@/domain/rich-text";
 import type { ReceiptId } from "@/content/receipts";
-import { stats } from "@/content/stats";
-
-/** The largest whole hundred thousand the counted lines exceed, so the claim stays true. */
-const linesFloor = Math.floor(stats.typescriptLines / 100_000) * 100_000;
 
 export const hero = {
   lede: [
-    "I designed, built and run The Trader's Hindsight, ",
+    "I build web products from the database to the interface, and keep them running after launch. I designed, built and run The Trader's Hindsight, ",
     { claim: "a live subscription SaaS for forex and prop-firm traders", receipt: "live-site" },
-    ". It is ",
+    ". Before that, I spent ",
     {
-      claim: `over ${formatCount(linesFloor)} lines of TypeScript with ${formatCount(stats.testFiles)} automated test files`,
-      receipt: "repo-count",
-    },
-    ". Before that, I spent almost four years building ",
-    {
-      claim: "REST APIs and payment integrations for a London e‑commerce platform",
+      claim:
+        "almost four years building REST APIs and payment integrations for a London e‑commerce platform",
       receipt: "mtrendz",
     },
-    ", remotely.",
+    ", remotely. My background is in security: ",
+    {
+      claim: "an M.Sc. in Cyber Security and over a year as a security specialist",
+      receipt: "security-background",
+    },
+    ".",
   ] satisfies RichText<ReceiptId>,
   availability: {
     headline: "Open to full stack, backend and product engineering roles.",

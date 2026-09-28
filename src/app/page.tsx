@@ -2,13 +2,10 @@ import { homeProse } from "@/content/home";
 import { receipts } from "@/content/receipts";
 import { numberReceipts } from "@/domain/receipts";
 import { Contact } from "@/sections/Contact";
-import { Evidence } from "@/sections/Evidence";
-import { Experience } from "@/sections/Experience";
+import { Education } from "@/sections/Education";
 import { Hero } from "@/sections/Hero";
-import { Ledger } from "@/sections/Ledger";
-import { Security } from "@/sections/Security";
-import { Studio } from "@/sections/Studio";
-import { Writing } from "@/sections/Writing";
+import { HowIWork } from "@/sections/HowIWork";
+import { SelectedWork } from "@/sections/SelectedWork";
 
 export default function Home() {
   // One numbering for the whole page: receipts read 1, 2, 3 from top to bottom.
@@ -16,12 +13,9 @@ export default function Home() {
   return (
     <>
       <Hero numbering={numbering} />
-      <Evidence numbering={numbering} />
-      <Ledger />
-      <Security numbering={numbering} />
-      <Experience />
-      <Studio />
-      <Writing />
+      <SelectedWork />
+      <HowIWork numbering={numbering} />
+      <Education />
       <Contact />
     </>
   );

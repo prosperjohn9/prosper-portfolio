@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { caseStudyFigures, caseStudyProse } from "@/content/case-study";
 import { homeProse } from "@/content/home";
 import { receipts, type ReceiptId } from "@/content/receipts";
-import { screenshots } from "@/content/screenshots";
 import type { RichText } from "@/domain/rich-text";
 import { citedReceipts, isLink } from "@/domain/rich-text";
 import { figureId, type Screenshot } from "@/domain/screenshot";
@@ -14,7 +13,7 @@ interface Page {
 }
 
 const pages: Page[] = [
-  { name: "home page", prose: homeProse, figures: Object.values(screenshots) },
+  { name: "home page", prose: homeProse, figures: [] },
   { name: "case study", prose: caseStudyProse, figures: caseStudyFigures },
 ];
 
@@ -32,7 +31,6 @@ describe("receipts", () => {
       .filter(isLink)
       .map((link) => link.href)
       .filter((href) => href.startsWith("#figure-"));
-    expect(figureLinks.length).toBeGreaterThan(0);
     for (const href of figureLinks) expect(figureIds).toContain(href);
   });
 });

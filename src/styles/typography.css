@@ -35,6 +35,13 @@
     font-size: 1.15rem;
     line-height: 1.25;
   }
+  /* A heading inside a section, above a list of its own. */
+  .t-subhead {
+    font-weight: 750;
+    font-stretch: 112%;
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
   .t-lede {
     font-size: clamp(1.18rem, 2.3vw, 1.5rem);
     line-height: 1.5;

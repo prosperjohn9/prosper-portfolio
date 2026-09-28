@@ -1,7 +1,5 @@
 import { expect, test } from "@playwright/test";
-import stats from "../src/content/stats.json";
-
-const SECTIONS = ["evidence", "numbers", "security", "experience", "studio", "writing", "contact"];
+const SECTIONS = ["work", "how-i-work", "education", "contact"];
 
 test("the sections appear in order, each with a heading", async ({ page }) => {
   await page.goto("/");
@@ -53,19 +51,22 @@ test("every image loads and is described", async ({ page }) => {
   }
 });
 
-test("the ledger shows the figures exactly as counted", async ({ page }) => {
+test("Selected work leads to the case study and to each live site", async ({ page }) => {
   await page.goto("/");
-  const ledger = page.locator("#numbers table");
-  for (const value of [stats.typescriptLines, stats.apiRoutes, stats.testFiles, stats.testLines]) {
-    await expect(ledger).toContainText(value.toLocaleString("en-GB"));
+  const work = page.locator("#work");
+  await expect(work.getByRole("link", { name: "Read the case study" })).toHaveAttribute(
+    "href",
+    "/work/traders-hindsight",
+  );
+  for (const site of ["tradershindsight.com", "goldencrestservices.com", "isilens.co.uk"]) {
+    await expect(work.getByRole("link", { name: site })).toHaveAttribute("href", `https://${site}`);
   }
-  await expect(ledger).toContainText(`at commit ${stats.commit}`);
 });
 
 test("the call request arrives with its subject", async ({ page }) => {
   await page.goto("/");
-  const ask = page.getByRole("link", { name: "Ask how it is built" });
-  await expect(ask).toHaveAttribute(
+  // On phones the note holding this link is closed until its number is tapped.
+  await expect(page.locator(".note a", { hasText: "Ask me how it is built" })).toHaveAttribute(
     "href",
     /^mailto:prosperjohn9@gmail\.com\?subject=How%20The%20Trader/,
   );

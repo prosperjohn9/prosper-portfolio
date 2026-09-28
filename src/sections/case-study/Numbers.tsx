@@ -1,12 +1,9 @@
 import { Section } from "@/components/layout/Section";
 import { Prose } from "@/components/receipts/Prose";
-import { ButtonLink, ButtonRow } from "@/components/ui/ButtonLink";
-import { contact, ledger } from "@/content/home";
-import { profile } from "@/content/profile";
-import { mailto } from "@/domain/links";
-import styles from "./Ledger.module.css";
+import { ledger } from "@/content/case-study";
+import styles from "./Numbers.module.css";
 
-export function Ledger() {
+export function Numbers() {
   return (
     <Section id="numbers" title={ledger.title}>
       <p className="t-intro max-w-[38rem]">{ledger.intro}</p>
@@ -33,14 +30,6 @@ export function Ledger() {
           ))}
         </tbody>
       </table>
-      <ButtonRow>
-        <ButtonLink href={mailto(profile.email, contact.walkthroughSubject)} variant="primary">
-          Ask how it is built
-        </ButtonLink>
-        <ButtonLink href={profile.links.productShowcase}>
-          See the public showcase on GitHub
-        </ButtonLink>
-      </ButtonRow>
     </Section>
   );
 }

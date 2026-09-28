@@ -6,7 +6,7 @@ export interface Feature<Id extends string = string> {
   description: RichText<Id>;
 }
 
-/** A rule the product keeps, such as a security or design decision, and why it matters. */
+/** A rule kept, such as a security decision or a way of working, and why it matters. */
 export interface ProductRule<Id extends string = string> {
   rule: string;
   reason: RichText<Id>;
@@ -19,18 +19,11 @@ export interface LedgerRow {
   source: RichText<never>;
 }
 
-/** A job or a degree, newest first. */
+/** A degree, or another dated step, newest first. */
 export interface Milestone {
   period: string;
   title: string;
   detail?: string;
-}
-
-/** A site built for a client. */
-export interface ClientProject {
-  name: string;
-  href: string;
-  description: string;
 }
 
 /** Something I built or worked on: a product, a client site or a job. */

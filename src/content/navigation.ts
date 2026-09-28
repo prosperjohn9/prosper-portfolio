@@ -6,10 +6,8 @@ export interface NavItem {
 
 /** Section links shown in the header on wider screens. */
 export const sectionNav: readonly NavItem[] = [
-  { id: "evidence", label: "Product" },
-  { id: "numbers", label: "Numbers" },
-  { id: "security", label: "Security" },
-  { id: "experience", label: "Experience" },
+  { id: "work", label: "Work" },
+  { id: "how-i-work", label: "How I work" },
 ];
 
 /** Always visible, on every screen size. */

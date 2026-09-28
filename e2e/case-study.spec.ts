@@ -1,9 +1,19 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
+import stats from "../src/content/stats.json";
 import { CASE_STUDY, PAGES } from "./pages";
 
-const SECTIONS = ["why", "demo", "firm-fit", "architecture", "delivery", "walkthrough"];
+const SECTIONS = [
+  "why",
+  "features",
+  "demo",
+  "firm-fit",
+  "security",
+  "delivery",
+  "numbers",
+  "walkthrough",
+];
 
 const panel = (page: Page) => page.getByRole("figure", { name: /What did these habits cost/ });
 const total = (page: Page) =>
@@ -99,11 +109,19 @@ test.describe("without JavaScript", () => {
 test("the real report is shown after the demo", async ({ page }) => {
   await page.goto(CASE_STUDY);
   // On phones the note holding this link is closed until its number is tapped.
-  await expect(page.locator(".note a", { hasText: "shown below" })).toHaveAttribute(
-    "href",
-    "#figure-d",
-  );
+  await expect(
+    page.locator("#receipt-screenshot-hindsight a", { hasText: "shown below" }),
+  ).toHaveAttribute("href", "#figure-d");
   await expect(page.locator("#demo #figure-d img")).toHaveAttribute("alt", /Hindsight/);
+});
+
+test("the ledger shows the figures exactly as counted", async ({ page }) => {
+  await page.goto(CASE_STUDY);
+  const ledger = page.locator("#numbers table");
+  for (const value of [stats.typescriptLines, stats.apiRoutes, stats.testFiles, stats.testLines]) {
+    await expect(ledger).toContainText(value.toLocaleString("en-GB"));
+  }
+  await expect(ledger).toContainText(`at commit ${stats.commit}`);
 });
 
 test("the call request arrives with its subject", async ({ page }) => {

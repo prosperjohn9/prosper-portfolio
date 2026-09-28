@@ -23,11 +23,11 @@ test("the header always offers a way to make contact", async ({ page }) => {
 
 test("section links show on desktop and fold away on phones", async ({ page }, info) => {
   await page.goto("/");
-  const product = page
+  const work = page
     .getByRole("navigation", { name: "Sections" })
-    .getByRole("link", { name: "Product" });
-  if (info.project.name === "phone") await expect(product).toBeHidden();
-  else await expect(product).toBeVisible();
+    .getByRole("link", { name: "Work", exact: true });
+  if (info.project.name === "phone") await expect(work).toBeHidden();
+  else await expect(work).toBeVisible();
 });
 
 test("theme follows the device setting when nothing was picked", async ({ page }) => {

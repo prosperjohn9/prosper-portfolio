@@ -11,9 +11,9 @@ async function noteFor(page: Page, index: number) {
   return page.locator(href!);
 }
 
-test("the hero's figures come from the counted repository", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator("main")).toContainText(`${stats.testFiles} automated test files`);
+test("the case study's figures come from the counted repository", async ({ page }) => {
+  await page.goto(CASE_STUDY);
+  await expect(page.locator("#delivery")).toContainText(`${stats.testFiles} automated test files`);
   await expect(page.locator("main")).toContainText(`commit ${stats.commit}`);
 });
 

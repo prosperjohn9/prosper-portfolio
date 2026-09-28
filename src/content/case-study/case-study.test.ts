@@ -1,6 +1,38 @@
 import { describe, expect, it } from "vitest";
-import { demo, demoMonth, demoTrades } from "@/content/case-study";
+import { caseStudyFigures, demo, demoMonth, demoTrades, ledger } from "@/content/case-study";
+import { screenshots } from "@/content/screenshots";
+import { stats } from "@/content/stats";
+import { formatCount } from "@/domain/format";
 import { rankHabits, replayMonth, type HabitId } from "@/domain/hindsight";
+
+describe("screenshots", () => {
+  it("are lettered A, B, C… in order", () => {
+    const letters = Object.values(screenshots).map((s) => s.letter);
+    expect(letters).toEqual(letters.map((_, i) => String.fromCharCode(65 + i)));
+  });
+
+  it("appear on the case study in letter order", () => {
+    expect(caseStudyFigures.map((s) => s.letter)).toEqual(
+      Object.values(screenshots).map((s) => s.letter),
+    );
+  });
+});
+
+describe("the numbers ledger", () => {
+  const figure = (what: string) => ledger.rows.find((row) => row.what === what)?.figure;
+
+  it.each([
+    ["Lines of TypeScript, not counting tests", stats.typescriptLines],
+    ["Pages", stats.pages],
+    ["API routes", stats.apiRoutes],
+    ["SQL migrations written, now merged into one schema baseline", stats.sqlMigrations],
+    ["Automated test files", stats.testFiles],
+    ["Lines of tests", stats.testLines],
+    ["Commits since December 2025", stats.commits],
+  ])("shows %s exactly as counted", (what, counted) => {
+    expect(figure(what)).toBe(formatCount(counted));
+  });
+});
 
 // The demo only teaches if its made-up month tells the story the copy promises.
 describe("the demo month", () => {
