@@ -6,38 +6,13 @@ import {
   rankHabits,
   replayMonth,
   type HabitId,
+  type HindsightDemoCopy,
   type Replay,
   type ReplayedTrade,
   type Trade,
 } from "@/domain/hindsight";
 import styles from "./HindsightDemo.module.css";
 import { useCountUp } from "./useCountUp";
-
-interface HabitCopy {
-  key: string;
-  name: string;
-  phrase: string;
-}
-
-export interface HindsightDemoCopy {
-  title: string;
-  exampleLabel: string;
-  totalLabel: string;
-  prompt: string;
-  noScriptPrompt: string;
-  asTraded: string;
-  footnote: string;
-  takeOut: string;
-  putBack: string;
-  reset: string;
-  better: string;
-  winRate: string;
-  and: string;
-  tradesSummary: string;
-  chartCaption: string;
-  habits: Record<HabitId, HabitCopy>;
-  table: Record<"day" | "pair" | "habits" | "pnl" | "replayed" | "none" | "removed", string>;
-}
 
 interface HindsightDemoProps {
   trades: readonly Trade[];

@@ -1,7 +1,6 @@
 /* The ledger: the one ruled table on the page, so its lines mean "audited". */
 .table {
   width: 100%;
-  margin-top: 12px;
   border-collapse: collapse;
   font-size: 1rem;
 }

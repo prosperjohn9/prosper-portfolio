@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { caseStudyFigures, caseStudyProse } from "@/content/case-study";
 import { homeProse } from "@/content/home";
+import { projects } from "@/content/projects";
 import { receipts, type ReceiptId } from "@/content/receipts";
 import type { RichText } from "@/domain/rich-text";
 import { citedReceipts, isLink } from "@/domain/rich-text";
+import { caseStudyFigures, caseStudyProse } from "@/domain/project";
 import { figureId, type Screenshot } from "@/domain/screenshot";
 
 interface Page {
@@ -14,7 +15,11 @@ interface Page {
 
 const pages: Page[] = [
   { name: "home page", prose: homeProse, figures: [] },
-  { name: "case study", prose: caseStudyProse, figures: caseStudyFigures },
+  ...projects.flatMap(({ name, caseStudy }) =>
+    caseStudy
+      ? [{ name, prose: caseStudyProse(caseStudy), figures: caseStudyFigures(caseStudy) }]
+      : [],
+  ),
 ];
 
 describe("receipts", () => {

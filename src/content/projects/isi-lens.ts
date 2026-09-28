@@ -1,4 +1,4 @@
-import type { Project } from "@/domain/portfolio";
+import type { Project } from "@/domain/project";
 
 export const isiLens = {
   slug: "isi-lens",

@@ -74,3 +74,34 @@ export function rankHabits(trades: readonly Trade[]): HabitCost[] {
     .filter((h) => h.cost > 0)
     .sort((a, b) => b.cost - a.cost);
 }
+
+/** How the demo names a habit. */
+export interface HabitCopy {
+  /** One letter, shown under the trades the habit produced. */
+  key: string;
+  name: string;
+  /** The name inside a sentence: "Without revenge trades, …". */
+  phrase: string;
+}
+
+/** Every word the demo shows, so the component holds no copy of its own. */
+export interface HindsightDemoCopy {
+  title: string;
+  exampleLabel: string;
+  totalLabel: string;
+  prompt: string;
+  noScriptPrompt: string;
+  asTraded: string;
+  footnote: string;
+  takeOut: string;
+  putBack: string;
+  reset: string;
+  /** {habits} and {amount} are filled in by the demo. */
+  better: string;
+  winRate: string;
+  and: string;
+  tradesSummary: string;
+  chartCaption: string;
+  habits: Record<HabitId, HabitCopy>;
+  table: Record<"day" | "pair" | "habits" | "pnl" | "replayed" | "none" | "removed", string>;
+}

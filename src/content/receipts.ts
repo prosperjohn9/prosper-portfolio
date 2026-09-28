@@ -4,7 +4,7 @@ import type { Receipt } from "@/domain/receipts";
 import { figureId } from "@/domain/screenshot";
 import { contact } from "@/content/home/contact";
 import { profile } from "@/content/profile";
-import { screenshots } from "@/content/screenshots";
+import { screenshots } from "@/content/projects/traders-hindsight/screenshots";
 import { stats } from "@/content/stats";
 
 const site = { text: "tradershindsight.com", href: profile.links.product };

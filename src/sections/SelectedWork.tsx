@@ -4,7 +4,7 @@ import { work } from "@/content/home";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { mailto, workPath } from "@/domain/links";
-import type { Project } from "@/domain/portfolio";
+import type { Project } from "@/domain/project";
 
 function ProjectLinks({ project }: { project: Project }) {
   if (!project.caseStudy && !project.site) return null;

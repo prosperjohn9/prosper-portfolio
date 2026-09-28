@@ -31,6 +31,13 @@ test("the home page leads to the case study", async ({ page }) => {
   await expect(page).toHaveTitle(/case study/);
 });
 
+test("only projects with a case study have a page", async ({ request }) => {
+  expect((await request.get(CASE_STUDY)).status()).toBe(200);
+  // Isi Lens is in Selected work but has no case study yet.
+  expect((await request.get("/work/isi-lens")).status()).toBe(404);
+  expect((await request.get("/work/no-such-project")).status()).toBe(404);
+});
+
 test("the sections appear in order, each with a heading", async ({ page }) => {
   await page.goto(CASE_STUDY);
   const ids = await page.locator("main section[id]").evaluateAll((els) => els.map((el) => el.id));

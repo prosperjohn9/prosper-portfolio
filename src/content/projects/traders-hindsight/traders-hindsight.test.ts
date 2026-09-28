@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { caseStudyFigures, demo, demoMonth, demoTrades, ledger } from "@/content/case-study";
-import { screenshots } from "@/content/screenshots";
+import { tradersHindsight } from "@/content/projects/traders-hindsight";
+import { demoCopy } from "@/content/projects/traders-hindsight/demo";
+import { demoMonth, demoTrades } from "@/content/projects/traders-hindsight/demo-trades";
+import { numbers } from "@/content/projects/traders-hindsight/numbers";
+import { screenshots } from "@/content/projects/traders-hindsight/screenshots";
 import { stats } from "@/content/stats";
 import { formatCount } from "@/domain/format";
 import { rankHabits, replayMonth, type HabitId } from "@/domain/hindsight";
+import { caseStudyFigures } from "@/domain/project";
 
 describe("screenshots", () => {
   it("are lettered A, B, C… in order", () => {
@@ -12,13 +16,14 @@ describe("screenshots", () => {
   });
 
   it("appear on the case study in letter order", () => {
-    expect(caseStudyFigures.map((s) => s.letter)).toEqual(
+    expect(caseStudyFigures(tradersHindsight.caseStudy).map((s) => s.letter)).toEqual(
       Object.values(screenshots).map((s) => s.letter),
     );
   });
 });
 
 describe("the numbers ledger", () => {
+  const ledger = numbers.blocks.find((block) => block.kind === "ledger")!;
   const figure = (what: string) => ledger.rows.find((row) => row.what === what)?.figure;
 
   it.each([
@@ -45,7 +50,7 @@ describe("the demo month", () => {
   });
 
   it("finds trades for every habit the panel offers", () => {
-    const offered = Object.keys(demo.panel.habits) as HabitId[];
+    const offered = Object.keys(demoCopy.habits) as HabitId[];
     expect(ranking.map((h) => h.habit).sort()).toEqual([...offered].sort());
   });
 
@@ -69,6 +74,6 @@ describe("the demo month", () => {
   });
 
   it("labels itself as example data with the right count", () => {
-    expect(demo.panel.exampleLabel).toContain(`${demoTrades.length} made-up trades`);
+    expect(demoCopy.exampleLabel).toContain(`${demoTrades.length} made-up trades`);
   });
 });

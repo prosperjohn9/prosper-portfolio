@@ -2,7 +2,7 @@
    phones, across it on wide screens. */
 .steps {
   display: grid;
-  margin: 24px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
   counter-reset: step;
