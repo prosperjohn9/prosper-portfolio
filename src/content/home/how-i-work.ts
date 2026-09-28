@@ -1,6 +1,16 @@
 import type { ProductRule } from "@/domain/portfolio";
 import type { RichText } from "@/domain/rich-text";
 import type { ReceiptId } from "@/content/receipts";
+import {
+  aiWrittenCode,
+  howWillThisFail,
+  mcpAndAgentSafety,
+  typesAreASharedLanguage,
+} from "@/content/notes";
+import { notePath } from "@/domain/links";
+import type { Note } from "@/domain/note";
+
+const readTheNote = (note: Note) => ({ text: "Read the note", href: notePath(note.slug) });
 
 export const howIWork = {
   title: "How I work",
@@ -10,25 +20,29 @@ export const howIWork = {
       {
         rule: "I own what ships, even when AI wrote it",
         reason: [
-          "I use AI to explore, scaffold, test and debug, then slow down for architecture, security, data handling and failure modes. The skill is knowing what to verify.",
+          "I use AI to explore, scaffold, test and debug, then slow down for architecture, security, data handling and failure modes. The skill is knowing what to verify. ",
+          readTheNote(aiWrittenCode),
         ],
       },
       {
         rule: "Types are a shared language",
         reason: [
-          "Between the API, the interface and the engineers changing both. I want types that state the business rules and rule out invalid states, not clever ones. The goal is fewer surprises in production.",
+          "Between the API, the interface and the engineers changing both. I want types that state the business rules and rule out invalid states, not clever ones. The goal is fewer surprises in production. ",
+          readTheNote(typesAreASharedLanguage),
         ],
       },
       {
         rule: "Connecting an agent is the easy part",
         reason: [
-          "The real work is around it: what it may touch, checks on what it does, a record of every action, and approval before anything destructive. Every tool it gets widens what can go wrong.",
+          "The real work is around it: what it may touch, checks on what it does, a record of every action, and approval before anything destructive. Every tool it gets widens what can go wrong. ",
+          readTheNote(mcpAndAgentSafety),
         ],
       },
       {
         rule: "Ask how it will fail before it ships",
         reason: [
-          "What will we measure? Can we roll it back? What if traffic is ten times higher? I learned to ask on systems serving 250,000+ users, and I ask it on new products too.",
+          "What will we measure? Can we roll it back? What if traffic is ten times higher? I learned to ask on systems serving 250,000+ users, and I ask it on new products too. ",
+          readTheNote(howWillThisFail),
         ],
       },
     ] satisfies ProductRule[],

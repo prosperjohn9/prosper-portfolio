@@ -12,3 +12,8 @@ export function isSitePage(href: string): boolean {
 export function workPath(slug: string): string {
   return `/work/${slug}`;
 }
+
+/** The address of a note on this site. */
+export function notePath(slug: string): string {
+  return `/notes/${slug}`;
+}

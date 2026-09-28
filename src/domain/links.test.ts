@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isSitePage, mailto, workPath } from "@/domain/links";
+import { isSitePage, mailto, notePath, workPath } from "@/domain/links";
 
 describe("mailto", () => {
   it("links to the address alone when there is no subject", () => {
@@ -33,5 +33,12 @@ describe("workPath", () => {
   it("puts a project's page under /work", () => {
     expect(workPath("traders-hindsight")).toBe("/work/traders-hindsight");
     expect(isSitePage(workPath("traders-hindsight"))).toBe(true);
+  });
+});
+
+describe("notePath", () => {
+  it("puts a note under /notes", () => {
+    expect(notePath("types-are-a-shared-language")).toBe("/notes/types-are-a-shared-language");
+    expect(isSitePage(notePath("types-are-a-shared-language"))).toBe(true);
   });
 });

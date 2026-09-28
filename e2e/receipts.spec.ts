@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import stats from "../src/content/stats.json";
-import { CASE_STUDY, PAGES } from "./pages";
+import { CASE_STUDY, PAGES_WITH_RECEIPTS } from "./pages";
 
 const cites = (page: Page) => page.locator("[data-cite]");
 
@@ -17,7 +17,7 @@ test("the case study's figures come from the counted repository", async ({ page 
   await expect(page.locator("main")).toContainText(`commit ${stats.commit}`);
 });
 
-for (const path of PAGES) {
+for (const path of PAGES_WITH_RECEIPTS) {
   test(`${path}: receipt numbers first appear as 1, 2, 3 in order, each with exactly one note`, async ({
     page,
   }) => {
