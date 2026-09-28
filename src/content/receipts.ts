@@ -8,8 +8,6 @@ import { screenshots } from "@/content/screenshots";
 import { stats } from "@/content/stats";
 
 const site = { text: "tradershindsight.com", href: profile.links.product };
-const linkedin = { text: "LinkedIn", href: profile.links.linkedin };
-const cv = { text: "CV", href: profile.cvPath };
 const below = (letter: string) => ({ text: "shown below", href: `#${figureId(letter)}` });
 const walkthrough = {
   text: "Ask me how it is built",
@@ -20,7 +18,7 @@ const walkthrough = {
 export const receipts = {
   "live-site": {
     title: "Live site.",
-    body: ["Open ", site, " and sign up; plans start at $12 a month."],
+    body: ["Open ", site, " and sign up. Plans start at $12 a month."],
   },
   "repo-count": {
     title: "Counted from the repository.",
@@ -42,13 +40,9 @@ export const receipts = {
     title: "Checked in the code.",
     body: [`The private repository, at commit ${stats.commit}. `, walkthrough, "."],
   },
-  mtrendz: {
-    title: "MTrendz, London, Sep 2021 to Jun 2025.",
-    body: ["Listed on ", linkedin, " and in my ", cv, "."],
-  },
   "founder-story": {
     title: "Founder story.",
-    body: ["Told in public on ", site, ", in my own numbers."],
+    body: ["Published on ", site, "."],
   },
   "screenshot-hindsight": {
     title: `Screenshot ${screenshots.hindsight.letter}.`,
@@ -65,24 +59,17 @@ export const receipts = {
   "firm-fit-page": {
     title: "Public page.",
     body: [
+      "Try it at ",
       {
         text: "tradershindsight.com/prop-firm-fit",
         href: `${profile.links.product}/prop-firm-fit`,
       },
-      " runs Firm Fit and says the statement is read in the browser and never uploaded.",
+      ". No account needed.",
     ],
-  },
-  "security-background": {
-    title: "Üsküdar University, Feb 2026, and Meteotech, Abuja, Mar 2019 to Jun 2020.",
-    body: ["Both on ", linkedin, " and in my ", cv, "."],
   },
   "read-only-brokers": {
-    title: "Stated to users.",
-    body: [
-      "The ",
-      { text: "landing page", href: profile.links.product },
-      " says the app can see trades but cannot place, change or close one, or move money.",
-    ],
+    title: "Public promise.",
+    body: ["Made to every trader on ", site, "."],
   },
 } satisfies Record<string, Receipt>;
 

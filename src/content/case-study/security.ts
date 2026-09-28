@@ -5,12 +5,7 @@ import type { ReceiptId } from "@/content/receipts";
 export const security = {
   title: "Security decisions",
   intro: [
-    "Traders connect real broker accounts, so I designed the app RLS-first: the database decides who can read a row, not the API route. My background is in security: ",
-    {
-      claim: "an M.Sc. in Cyber Security and over a year as a security specialist",
-      receipt: "security-background",
-    },
-    ".",
+    "Traders connect real broker accounts, so I designed the app RLS-first: the database decides who can read a row, not the API route. My background is in security: an M.Sc. in Cyber Security and over a year as a security specialist.",
   ] satisfies RichText<ReceiptId>,
   rules: [
     {

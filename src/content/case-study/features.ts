@@ -28,7 +28,7 @@ export const features = {
     {
       name: "Rule tracking",
       description: [
-        "Tracks the rules of FTMO, FundingPips, FundedNext, The5ers and Alpha Capital, and disconnects an account automatically when it breaches one.",
+        "Tracks the rules of any prop firm, with ready-made presets for FTMO, FundingPips, FundedNext, The5ers and Alpha Capital. It disconnects an account automatically when it breaches one.",
       ],
     },
     {

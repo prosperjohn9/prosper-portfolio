@@ -28,16 +28,5 @@ export const ledger = {
     { what: "Lines of tests", figure: formatCount(stats.testLines), source: repository },
     { what: "Commits since December 2025", figure: formatCount(stats.commits), source: repository },
     { what: "Price", figure: "$12 a month", source: [site] },
-    { what: "Prop firms with rule tracking", figure: "5", source: [site] },
-    {
-      what: "Prop-firm challenges I took, across four firms",
-      figure: "20",
-      source: ["Founder story, ", site],
-    },
-    {
-      what: "My net result after refunds",
-      figure: "−$4,428",
-      source: ["Founder story, ", site],
-    },
   ] satisfies LedgerRow[],
 };

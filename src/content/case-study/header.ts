@@ -23,7 +23,7 @@ export const header = {
 export const why = {
   title: "Why I built it",
   text: [
-    "From June 2025 to September 2026 I took 20 prop-firm challenges across four firms and ",
+    "Between June 2025 and its launch in September 2026, I took 20 prop-firm challenges across four firms and ",
     { claim: "ended $4,428 down after refunds", receipt: "founder-story" },
     ". A journal shows what happened. It does not say what each habit cost, or whether the month would have been positive without it. That is the question the product answers.",
   ] satisfies RichText<ReceiptId>,
