@@ -20,15 +20,17 @@ Hindsight at `/work/traders-hindsight` with a working demo of its core idea.
 
 ```
 src/
-  app/          routes only: the home page, /work/[slug] and /notes/[slug]
+  app/          routes only: the home page, /work/[slug] and /notes/[slug], plus the share
+                images, icons, sitemap and robots.txt
   sections/     the parts of a page (Hero, SelectedWork, HowIWork, ...), each reading its
                 content; sections/case-study/ renders any project's page
-  components/   reusable UI: layout/, receipts/, figures/, hindsight-demo/ and ui/
+  components/   reusable UI: layout/, receipts/, figures/, hindsight-demo/ and ui/;
+                share-card/ draws the link-preview images
   content/      the words and data on the site, typed by domain/; one file (or folder)
                 per project in content/projects/
   domain/       pure TypeScript: rich text, receipt numbering, formatting, the Hindsight
                 replay; no React
-  lib/          infrastructure: the head scripts, security headers
+  lib/          infrastructure: the head scripts, security headers, search metadata
   styles/       component styles that need more than utility classes
 scripts/        the repository counter behind the published figures
 e2e/            Playwright tests, including accessibility checks
@@ -49,14 +51,16 @@ Give it a `caseStudy` and it also gets its own page at `/work/<slug>`, built at 
 case study is a lede, a few facts and a list of sections. Each section is a list of typed
 blocks: text, features, rules, figures, steps, a ledger, buttons, or a demo panel. Text blocks
 that follow each other share the reading column with their receipts in the margin; the rest
-take the full width. Slugs without a case study return 404. The Trader's Hindsight, in
+take the full width. Slugs without a case study return 404. The page also gets its own share
+image and a place in the sitemap. The Trader's Hindsight, in
 `src/content/projects/traders-hindsight/`, is the worked example.
 
 ## Adding a note
 
 A note is one file in `src/content/notes/`, typed by `Note` in `src/domain/note.ts`: a title,
 the date it was first posted, a link to the original, and its paragraphs. Adding it to the list
-in `src/content/notes/index.ts` gives it a page at `/notes/<slug>`.
+in `src/content/notes/index.ts` gives it a page at `/notes/<slug>`, with its own share image and
+a place in the sitemap.
 
 ## Receipts
 
@@ -84,15 +88,15 @@ Its first render is complete HTML, so without JavaScript it still shows the cost
 
 ## Quality gates
 
-| Command                | What it checks                                                              |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `npm run format:check` | Prettier formatting, with Tailwind classes sorted                           |
-| `npm run typecheck`    | TypeScript, including generated route types                                 |
-| `npm run lint`         | ESLint with the Next.js, React and TypeScript rules                         |
-| `npm test`             | Unit tests                                                                  |
-| `npm run build`        | Production build                                                            |
-| `npm run test:e2e`     | Pages, interactions, security headers and WCAG 2.2 AA, on desktop and phone |
-| `npm run check`        | All of the above, in that order                                             |
+| Command                | What it checks                                                                               |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| `npm run format:check` | Prettier formatting, with Tailwind classes sorted                                            |
+| `npm run typecheck`    | TypeScript, including generated route types                                                  |
+| `npm run lint`         | ESLint with the Next.js, React and TypeScript rules                                          |
+| `npm test`             | Unit tests                                                                                   |
+| `npm run build`        | Production build                                                                             |
+| `npm run test:e2e`     | Pages, interactions, security headers, search metadata and WCAG 2.2 AA, on desktop and phone |
+| `npm run check`        | All of the above, in that order                                                              |
 
 CI runs the same gates on every push and pull request, and audits dependencies.
 
@@ -116,4 +120,5 @@ npm run check    # every quality gate
 ## Licence
 
 The code is available to read. The written content, photographs and screenshots are mine and
-are not licensed for reuse.
+are not licensed for reuse. The Archivo font files in `src/assets/fonts/` are under the SIL Open
+Font License.
