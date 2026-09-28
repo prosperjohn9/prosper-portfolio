@@ -9,7 +9,7 @@ const site = { text: "tradershindsight.com", href: profile.links.product };
 export const ledger = {
   title: "The numbers, and where they come from",
   intro:
-    "Every figure on this page, with its source. The repository figures are counted by a script from the private code, which I can show you on a call.",
+    "Every figure on this page, with its source. The repository figures are counted by a script from the private code.",
   caption: `Repository figures counted on ${formatDate(stats.countedOn)}, at commit ${stats.commit}.`,
   rows: [
     {

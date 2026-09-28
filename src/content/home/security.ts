@@ -1,4 +1,4 @@
-import type { SecurityRule } from "@/domain/portfolio";
+import type { ProductRule } from "@/domain/portfolio";
 import type { RichText } from "@/domain/rich-text";
 import type { ReceiptId } from "@/content/receipts";
 
@@ -48,5 +48,5 @@ export const security = {
         "Secret scanning on every CI run, a scheduled dependency audit, and error monitoring in production.",
       ],
     },
-  ] satisfies SecurityRule<ReceiptId>[],
+  ] satisfies ProductRule<ReceiptId>[],
 };

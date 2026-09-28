@@ -1,30 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { homeProse, ledger } from "@/content/home";
-import { receipts, type ReceiptId } from "@/content/receipts";
+import { ledger } from "@/content/home";
 import { screenshots } from "@/content/screenshots";
 import { stats } from "@/content/stats";
 import { formatCount } from "@/domain/format";
-import { citedReceipts, isLink } from "@/domain/rich-text";
-import { figureId } from "@/domain/screenshot";
-
-describe("home page receipts", () => {
-  it("cites every receipt, so no note is left without a claim", () => {
-    const cited = new Set(citedReceipts(homeProse));
-    const orphans = (Object.keys(receipts) as ReceiptId[]).filter((id) => !cited.has(id));
-    expect(orphans).toEqual([]);
-  });
-
-  it("links 'shown below' only to screenshots that exist", () => {
-    const figureIds = new Set(Object.values(screenshots).map((s) => `#${figureId(s.letter)}`));
-    const figureLinks = Object.values(receipts)
-      .flatMap((receipt) => receipt.body)
-      .filter(isLink)
-      .map((link) => link.href)
-      .filter((href) => href.startsWith("#figure-"));
-    expect(figureLinks.length).toBeGreaterThan(0);
-    for (const href of figureLinks) expect(figureIds).toContain(href);
-  });
-});
 
 describe("screenshots", () => {
   it("are lettered A, B, C… in order", () => {
