@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- The P from the site's Archivo (width 118, weight 800), navy on the marker yellow.
+       apple-icon.png and favicon.ico are renders of this file. -->
+  <rect width="32" height="32" rx="6" fill="#ffd84a"/>
+  <path fill="#14213d" transform="translate(6.15 25.5) scale(0.02766 -0.02766) translate(-82 0)" d="M82 0V687H570Q638 687 688.5 658.0Q739 629 766.5 576.5Q794 524 794 456Q794 386 766.0 333.5Q738 281 687.0 251.5Q636 222 567 222H279V0ZM279 370H515Q559 370 582.0 392.0Q605 414 605 455Q605 482 594.5 501.0Q584 520 564.5 530.0Q545 540 515 540H279Z"/>
+</svg>
