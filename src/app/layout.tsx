@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { profile } from "@/content/profile";
-import { fullName } from "@/domain/profile";
+import { siteMeta } from "@/content/site";
 import { enhanceScript } from "@/lib/enhance";
+import { siteUrl } from "@/lib/seo";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -17,8 +17,10 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.shortName}, ${profile.role.toLowerCase()}`,
-  description: `${fullName(profile)}, ${profile.role.toLowerCase()} in ${profile.location}. Founder of The Trader's Hindsight. Every claim on this site links to its proof.`,
+  // Resolves the relative addresses in every page's metadata.
+  metadataBase: siteUrl(),
+  title: siteMeta.title,
+  description: siteMeta.description,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

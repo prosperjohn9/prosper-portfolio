@@ -3,8 +3,10 @@ import { notFound } from "next/navigation";
 import { profile } from "@/content/profile";
 import { projectsWithPages } from "@/content/projects";
 import { receipts } from "@/content/receipts";
+import { workPath } from "@/domain/links";
 import { caseStudyProse } from "@/domain/project";
 import { numberReceipts } from "@/domain/receipts";
+import { pageMetadata } from "@/lib/seo";
 import { CaseStudyHeader } from "@/sections/case-study/CaseStudyHeader";
 import { CaseStudySection } from "@/sections/case-study/CaseStudySection";
 
@@ -23,10 +25,14 @@ const projectFor = async ({ params }: PageProps<"/work/[slug]">) => {
 export async function generateMetadata(props: PageProps<"/work/[slug]">): Promise<Metadata> {
   const project = await projectFor(props);
   if (!project) return {};
-  return {
-    title: `${project.name}, a case study by ${profile.shortName}`,
-    description: project.caseStudy.description,
-  };
+  return pageMetadata(
+    {
+      path: workPath(project.slug),
+      title: `${project.name}, a case study by ${profile.shortName}`,
+      description: project.caseStudy.description,
+    },
+    profile.shortName,
+  );
 }
 
 export default async function ProjectPage(props: PageProps<"/work/[slug]">) {

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { notes } from "@/content/notes";
 import { profile } from "@/content/profile";
+import { notePath } from "@/domain/links";
+import { pageMetadata } from "@/lib/seo";
 import { MoreNotes } from "@/sections/notes/MoreNotes";
 import { NoteArticle } from "@/sections/notes/NoteArticle";
 
@@ -20,10 +22,15 @@ const noteFor = async ({ params }: PageProps<"/notes/[slug]">) => {
 export async function generateMetadata(props: PageProps<"/notes/[slug]">): Promise<Metadata> {
   const note = await noteFor(props);
   if (!note) return {};
-  return {
-    title: `${note.title}, a note by ${profile.shortName}`,
-    description: note.paragraphs[0],
-  };
+  return pageMetadata(
+    {
+      path: notePath(note.slug),
+      title: `${note.title}, a note by ${profile.shortName}`,
+      description: note.paragraphs[0] ?? note.title,
+      published: note.published,
+    },
+    profile.shortName,
+  );
 }
 
 export default async function NotePage(props: PageProps<"/notes/[slug]">) {
