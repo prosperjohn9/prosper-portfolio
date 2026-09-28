@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isSitePage, mailto } from "@/domain/links";
+import { isSitePage, mailto, workPath } from "@/domain/links";
 
 describe("mailto", () => {
   it("links to the address alone when there is no subject", () => {
@@ -26,5 +26,12 @@ describe("isSitePage", () => {
     "//example.com",
   ])("treats %s as something else", (href) => {
     expect(isSitePage(href)).toBe(false);
+  });
+});
+
+describe("workPath", () => {
+  it("puts a project's page under /work", () => {
+    expect(workPath("traders-hindsight")).toBe("/work/traders-hindsight");
+    expect(isSitePage(workPath("traders-hindsight"))).toBe(true);
   });
 });

@@ -1,4 +1,4 @@
-import type { RichText } from "@/domain/rich-text";
+import type { LinkSegment, RichText } from "@/domain/rich-text";
 
 /** Something the product does, with the evidence for it. */
 export interface Feature<Id extends string = string> {
@@ -31,6 +31,22 @@ export interface ClientProject {
   name: string;
   href: string;
   description: string;
+}
+
+/** Something I built or worked on: a product, a client site or a job. */
+export interface Project {
+  /** Stable and URL-safe: it keys the list, and names the project's page when it has one. */
+  slug: string;
+  name: string;
+  period: string;
+  /** What it is, in a sentence or two. */
+  summary: string;
+  role: string;
+  stack?: readonly string[];
+  /** True when the project has its own page on this site, at /work/<slug>. */
+  caseStudy?: boolean;
+  /** Where to see it live. */
+  site?: LinkSegment;
 }
 
 /** A short labelled fact, such as a role or a price. */
