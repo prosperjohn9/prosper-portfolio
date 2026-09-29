@@ -9,6 +9,9 @@ export const siteMeta = {
   description: `${fullName(profile)}, ${profile.role.toLowerCase()} in ${profile.location}. Founder of The Trader's Hindsight. Every claim on this site links to its proof.`,
 };
 
+/** Shown on phones above the first receipts of a page, where they start closed. */
+export const receiptHint = "Tap a yellow number to see its proof.";
+
 /** Lines every page ends with. */
 export const footerNotes = [
   "No real trader data appears on this site: screenshots use fixture data, a test account or the public landing page.",

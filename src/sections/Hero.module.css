@@ -1,56 +1,79 @@
-/* Phones: portrait, name, the claims, their receipts, then availability.
-   Wide screens: the name across the top, the claims on the left, the portrait
-   and receipts in the margin. */
+/* Phones: the name, the portrait beside the role, then availability and the two
+   buttons, so the first screen always offers a way to get in touch; the claims
+   and their receipts follow. Wide screens: the name across the top, the claims
+   on the left, the portrait and receipts in the margin. */
 .hero {
   padding-top: clamp(28px, 6vw, 72px);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "photo" "name" "lede" "notes" "rest";
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "name name"
+    "photo role"
+    "rest rest"
+    "lede lede"
+    "notes notes";
+  column-gap: 14px;
   align-items: start;
 }
 
 .name {
   grid-area: name;
 }
+.role {
+  grid-area: role;
+  align-self: center;
+  margin: 18px 0 0;
+}
 .photo {
   grid-area: photo;
-  width: 84px;
-  height: 84px;
-  margin-bottom: 20px;
+  width: 56px;
+  height: 56px;
+  margin-top: 18px;
   border-radius: 3px;
   object-fit: cover;
 }
+.rest {
+  grid-area: rest;
+  margin-top: 22px;
+}
 .lede {
   grid-area: lede;
-  margin-top: 28px;
+  margin-top: 36px;
 }
 .notes {
   grid-area: notes;
   margin-top: 16px;
 }
-.rest {
-  grid-area: rest;
-  margin-top: 24px;
-}
 
 @media (min-width: 1000px) {
   .grid {
     grid-template-columns: var(--column-reading) var(--column-margin);
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto 1fr;
     grid-template-areas:
       "name name"
+      "role role"
       "lede photo"
       "lede notes"
       "rest notes";
     column-gap: var(--column-gap);
   }
+  .role {
+    align-self: start;
+    margin-top: 14px;
+  }
   .photo {
     width: 128px;
     height: 128px;
     margin: 34px 0 22px;
+  }
+  .lede {
+    margin-top: 28px;
+  }
+  .rest {
+    margin-top: 24px;
   }
   .notes {
     margin-top: 0;

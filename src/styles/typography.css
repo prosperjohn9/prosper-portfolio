@@ -7,12 +7,19 @@
     font-size: 1.0625rem;
     letter-spacing: -0.005em;
   }
+  /* Sized so the longest part of the name, "Chukwuemeke" (8.5em at this width),
+     fills the column on phones; capped on wide screens. */
   .t-name {
     font-weight: 800;
     font-stretch: 118%;
-    font-size: clamp(2.1rem, 8.6vw, 4.75rem);
+    font-size: clamp(2.1rem, calc((100vw - 32px) / 8.7), 4.75rem);
     line-height: 0.94;
     letter-spacing: -0.02em;
+  }
+  @media (min-width: 720px) {
+    .t-name {
+      font-size: clamp(2.1rem, calc((100vw - 80px) / 8.7), 4.75rem);
+    }
   }
   /* A page title below the name's size, such as a case study's. */
   .t-title {

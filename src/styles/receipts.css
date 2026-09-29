@@ -73,8 +73,17 @@
   }
 
   /* Phones: receipts sit under the text. With JavaScript they stay closed until
-     their number is tapped; without it, or when linked to, they stay open. */
+     their number is tapped, and a hint says so; without it, or when linked to,
+     they stay open. */
+  .receipt-hint {
+    display: none;
+  }
   @media (max-width: 999px) {
+    .js .receipt-hint {
+      display: block;
+      margin: 0 0 0.75rem;
+      color: var(--graphite);
+    }
     .note {
       margin-bottom: 0.75rem;
       padding: 12px 14px;

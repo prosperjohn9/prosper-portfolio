@@ -1,5 +1,6 @@
 import { MarginRow } from "@/components/layout/MarginRow";
 import { Prose } from "@/components/receipts/Prose";
+import { ReceiptHint } from "@/components/receipts/ReceiptHint";
 import { ReceiptNotes } from "@/components/receipts/ReceiptNotes";
 import type { ReceiptId } from "@/content/receipts";
 import type { Fact } from "@/domain/portfolio";
@@ -25,7 +26,14 @@ export function CaseStudyHeader({ project, caseStudy, numbering }: CaseStudyHead
         {project.name}
       </h1>
       <div className="mt-6">
-        <MarginRow margin={<ReceiptNotes notes={numbering.notesFor([caseStudy.lede])} />}>
+        <MarginRow
+          margin={
+            <>
+              <ReceiptHint />
+              <ReceiptNotes notes={numbering.notesFor([caseStudy.lede])} />
+            </>
+          }
+        >
           <p className="t-lede">
             <Prose text={caseStudy.lede} numberOf={numbering.numberOf} sweep />
           </p>
