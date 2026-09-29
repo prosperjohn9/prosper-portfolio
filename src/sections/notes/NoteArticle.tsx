@@ -1,3 +1,4 @@
+import { Prose } from "@/components/receipts/Prose";
 import { formatDate } from "@/domain/format";
 import type { Note } from "@/domain/note";
 
@@ -15,7 +16,7 @@ export function NoteArticle({ note }: { note: Note }) {
       <div className="mt-8 max-w-[38rem] space-y-5">
         {note.paragraphs.map((paragraph, index) => (
           <p key={index} className={index === 0 ? "t-lede" : undefined}>
-            {paragraph}
+            {typeof paragraph === "string" ? paragraph : <Prose text={paragraph} />}
           </p>
         ))}
       </div>

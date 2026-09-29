@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { notes } from "@/content/notes";
 import { profile } from "@/content/profile";
 import { notePath } from "@/domain/links";
+import { plainText } from "@/domain/note";
 import { pageMetadata } from "@/lib/seo";
 import { MoreNotes } from "@/sections/notes/MoreNotes";
 import { NoteArticle } from "@/sections/notes/NoteArticle";
@@ -26,7 +27,7 @@ export async function generateMetadata(props: PageProps<"/notes/[slug]">): Promi
     {
       path: notePath(note.slug),
       title: `${note.title}, a note by ${profile.shortName}`,
-      description: note.paragraphs[0] ?? note.title,
+      description: note.paragraphs[0] ? plainText(note.paragraphs[0]) : note.title,
       published: note.published,
     },
     profile.shortName,
