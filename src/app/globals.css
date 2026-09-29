@@ -16,6 +16,42 @@
   }
 }
 
+/* While Archivo loads, next/font shows "Archivo Fallback": Arial resized to take
+   the same room. Arial has no wide cuts, so the wide headings would come out
+   narrower, rewrap, and push the page down when Archivo arrives. These faces join
+   that family for the widths the headings use (108%, 112%, 118%), each sized to
+   match Archivo at that width, measured over the site's headings. */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 700 900;
+  font-stretch: 105% 110%;
+  ascent-override: 82.1%;
+  descent-override: 19.6%;
+  line-gap-override: 0%;
+  size-adjust: 107%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 700 900;
+  font-stretch: 111% 115%;
+  ascent-override: 77.4%;
+  descent-override: 18.5%;
+  line-gap-override: 0%;
+  size-adjust: 113.5%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 700 900;
+  font-stretch: 116% 125%;
+  ascent-override: 72.3%;
+  descent-override: 17.3%;
+  line-gap-override: 0%;
+  size-adjust: 121.5%;
+}
+
 /* Colour tokens. Light: ledger paper and navy ink. Dark: night and chalk.
    The marker is the one accent: it only ever marks a claim that has proof. */
 :root {
