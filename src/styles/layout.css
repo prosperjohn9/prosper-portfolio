@@ -33,10 +33,29 @@
 
   /* Screenshots of the dark app sit on the night plate in both themes. */
   .plate {
+    position: relative;
     display: block;
     overflow: hidden;
     border: 1px solid var(--plate-edge);
     border-radius: 6px;
     background: var(--plate);
+  }
+  .plate-hint {
+    display: none;
+  }
+  @media (max-width: 999px) {
+    .plate-hint {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      display: block;
+      padding: 4px 8px;
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
   }
 }

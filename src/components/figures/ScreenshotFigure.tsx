@@ -24,6 +24,10 @@ export function ScreenshotFigure({ shot, sizes }: ScreenshotFigureProps) {
           className="block h-auto w-full"
         />
         <span className="sr-only">(opens the screenshot at full size)</span>
+        {/* Shown on phones, where the screenshot is too small to read in place. */}
+        <span className="plate-hint" aria-hidden="true">
+          Open full size
+        </span>
       </a>
       <figcaption className="t-small mt-2.5 max-w-[42rem] text-graphite">
         <strong className="font-semibold text-ink">
