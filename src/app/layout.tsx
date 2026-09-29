@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { siteMeta } from "@/content/site";
 import { enhanceScript } from "@/lib/enhance";
-import { siteUrl } from "@/lib/seo";
+import { isIndexable, siteUrl } from "@/lib/seo";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   metadataBase: siteUrl(),
   title: siteMeta.title,
   description: siteMeta.description,
+  ...(isIndexable(siteUrl()) ? {} : { robots: { index: false } }),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

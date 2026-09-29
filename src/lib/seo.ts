@@ -14,6 +14,15 @@ export function siteUrl(env: Environment = process.env): URL {
   return new URL(host ? `https://${host}` : "http://localhost:3000");
 }
 
+/**
+ * Whether search engines should index the site at this address. Not on a
+ * *.vercel.app address: those stand in until the real domain is live, and the
+ * site should only ever be found at its own domain.
+ */
+export function isIndexable(url: URL): boolean {
+  return !url.hostname.endsWith(".vercel.app");
+}
+
 export interface PageSeo {
   /** The page's path on this site, such as "/notes/ai-written-code". */
   path: string;

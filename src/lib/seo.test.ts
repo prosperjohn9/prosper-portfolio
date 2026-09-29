@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pageMetadata, serializeJsonLd, siteUrl } from "@/lib/seo";
+import { isIndexable, pageMetadata, serializeJsonLd, siteUrl } from "@/lib/seo";
 
 describe("siteUrl", () => {
   it("uses the production domain Vercel provides", () => {
@@ -10,6 +10,16 @@ describe("siteUrl", () => {
 
   it("falls back to the local server anywhere else", () => {
     expect(siteUrl({}).href).toBe("http://localhost:3000/");
+  });
+});
+
+describe("isIndexable", () => {
+  it("keeps a vercel.app address out of search results", () => {
+    expect(isIndexable(new URL("https://prosper-portfolio-flame.vercel.app"))).toBe(false);
+  });
+
+  it("lets search engines index the site at its own domain", () => {
+    expect(isIndexable(new URL("https://example.com"))).toBe(true);
   });
 });
 
