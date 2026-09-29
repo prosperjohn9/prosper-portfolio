@@ -1,4 +1,5 @@
 import { Prose } from "@/components/receipts/Prose";
+import { FoldList } from "@/components/ui/FoldList";
 import type { ProductRule } from "@/domain/portfolio";
 
 interface RuleListProps<Id extends string> {
@@ -7,21 +8,20 @@ interface RuleListProps<Id extends string> {
   numberOf?: (id: Id) => number;
 }
 
-/** Rules as headings, each with its reason beside it on wide screens. */
+/** Rules as headings, each with its reason beside it on wide screens and folded under it on phones. */
 export function RuleList<Id extends string>({ rules, numberOf }: RuleListProps<Id>) {
   return (
-    <dl className="mt-4 mb-0">
-      {rules.map((item) => (
-        <div
-          key={item.rule}
-          className="grid gap-1 border-t border-rule py-4 md:grid-cols-[13rem_1fr] md:gap-6"
-        >
-          <dt className="t-h3">{item.rule}</dt>
-          <dd className="m-0">
-            <Prose text={item.reason} numberOf={numberOf} />
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <div className="mt-4">
+      <FoldList
+        items={rules.map((item) => ({
+          key: item.rule,
+          term: item.rule,
+          detail: <Prose text={item.reason} numberOf={numberOf} />,
+        }))}
+        rowClassName="border-t border-rule py-4"
+        wideRowClassName="grid gap-1 md:grid-cols-[13rem_1fr] md:gap-6"
+        termClassName="t-h3"
+      />
+    </div>
   );
 }

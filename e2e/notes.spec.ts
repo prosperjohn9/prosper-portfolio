@@ -3,7 +3,10 @@ import { NOTES } from "./pages";
 
 test("How I work links to every note", async ({ page }) => {
   await page.goto("/");
-  const links = page.locator("#how-i-work").getByRole("link", { name: "Read the note" });
+  // On phones the links sit in folded rows, so count them open or not.
+  const links = page
+    .locator("#how-i-work")
+    .getByRole("link", { name: "Read the note", includeHidden: true });
   await expect(links).toHaveCount(NOTES.length);
   const hrefs = await links.evaluateAll((els) => els.map((a) => a.getAttribute("href")));
   expect([...hrefs].sort()).toEqual([...NOTES].sort());

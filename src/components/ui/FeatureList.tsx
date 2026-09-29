@@ -1,4 +1,5 @@
 import { Prose } from "@/components/receipts/Prose";
+import { FoldList } from "@/components/ui/FoldList";
 import type { Feature } from "@/domain/portfolio";
 
 interface FeatureListProps<Id extends string> {
@@ -7,18 +8,18 @@ interface FeatureListProps<Id extends string> {
   numberOf?: (id: Id) => number;
 }
 
-/** What a product does, one ruled row per feature. */
+/** What a product does, one ruled row per feature; on phones each folds under its name. */
 export function FeatureList<Id extends string>({ items, numberOf }: FeatureListProps<Id>) {
   return (
-    <dl className="m-0">
-      {items.map((feature) => (
-        <div key={feature.name} className="border-t border-rule py-3.5">
-          <dt className="t-h3">{feature.name}</dt>
-          <dd className="m-0 mt-0.5">
-            <Prose text={feature.description} numberOf={numberOf} />
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <FoldList
+      items={items.map((feature) => ({
+        key: feature.name,
+        term: feature.name,
+        detail: <Prose text={feature.description} numberOf={numberOf} />,
+      }))}
+      rowClassName="border-t border-rule py-3.5"
+      termClassName="t-h3"
+      detailClassName="mt-0.5"
+    />
   );
 }

@@ -1,0 +1,34 @@
+/* On phones, before React swaps in the foldable rows, the static list already
+   shows only its terms, so the page does not jump when it does. Terms keep
+   room on the right for the open and close mark at every stage. */
+@media (max-width: 999px) {
+  :global(.js) .list dd {
+    display: none;
+  }
+  .term {
+    position: relative;
+    padding-right: 2rem;
+  }
+}
+
+summary.term {
+  cursor: pointer;
+  list-style: none;
+}
+summary.term::-webkit-details-marker {
+  display: none;
+}
+summary.term::after {
+  content: "+";
+  position: absolute;
+  top: 0;
+  right: 0.25rem;
+  color: var(--graphite);
+  font-weight: 400;
+}
+details[open] > summary.term::after {
+  content: "\2212";
+}
+details > summary.term + * {
+  margin-top: 0.25rem;
+}
