@@ -4,11 +4,22 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Minor and patch updates come grouped; each major update gets its own pull
+    # request, so one breaking change cannot hold back the rest.
     groups:
       development:
         dependency-type: development
+        update-types: [minor, patch]
       production:
         dependency-type: production
+        update-types: [minor, patch]
+    ignore:
+      # The types follow the Node version the site runs on (see package.json).
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
+      # Until typescript-eslint, which Next's lint rules use, supports TypeScript 7.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
     schedule:
