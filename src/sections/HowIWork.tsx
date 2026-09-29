@@ -13,7 +13,6 @@ export function HowIWork({ numbering }: { numbering: ReceiptNumbering<ReceiptId>
   return (
     <Section id="how-i-work" title={howIWork.title}>
       <MarginRow>
-        <h3 className="t-subhead">{positions.title}</h3>
         <RuleList rules={positions.items} />
         <p className="mt-4">
           <a href={profile.links.linkedin}>{positions.more}</a>

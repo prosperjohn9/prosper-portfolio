@@ -15,7 +15,6 @@ const readTheNote = (note: Note) => ({ text: "Read the note", href: notePath(not
 export const howIWork = {
   title: "How I work",
   positions: {
-    title: "What I write about",
     items: [
       {
         rule: "I own what ships, even when AI wrote it",
