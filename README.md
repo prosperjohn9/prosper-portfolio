@@ -5,9 +5,9 @@ The source of my personal site. I am a full stack software engineer and the foun
 the site is built around evidence: each claim it makes carries a note saying where the proof
 is and when it was checked.
 
-Status: in progress. So far: the home page; a case study of The Trader's Hindsight at
-`/work/traders-hindsight`, with a working demo of its core idea; and four notes at
-`/notes/<slug>`, first posted on LinkedIn.
+Status: in progress. So far: the home page; two case studies, The Trader's Hindsight at
+`/work/traders-hindsight`, with a working demo of its core idea, and Isi Lens at
+`/work/isi-lens`; and four notes at `/notes/<slug>`, first posted on LinkedIn.
 
 ## Stack
 

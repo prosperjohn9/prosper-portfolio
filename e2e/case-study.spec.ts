@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 import stats from "../src/content/stats.json";
-import { CASE_STUDY, PAGES } from "./pages";
+import { CASE_STUDY, ISI_LENS, PAGES } from "./pages";
 
 const SECTIONS = [
   "why",
@@ -32,9 +32,7 @@ test("the home page leads to the case study", async ({ page }) => {
 });
 
 test("only projects with a case study have a page", async ({ request }) => {
-  expect((await request.get(CASE_STUDY)).status()).toBe(200);
-  // Isi Lens is in Selected work but has no case study yet.
-  expect((await request.get("/work/isi-lens")).status()).toBe(404);
+  for (const path of [CASE_STUDY, ISI_LENS]) expect((await request.get(path)).status()).toBe(200);
   expect((await request.get("/work/no-such-project")).status()).toBe(404);
 });
 

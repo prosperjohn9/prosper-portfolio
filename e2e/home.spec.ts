@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import { CASE_STUDY, ISI_LENS } from "./pages";
+
 const SECTIONS = ["work", "how-i-work", "experience", "contact"];
 
 test("the sections appear in order, each with a heading", async ({ page }) => {
@@ -51,13 +53,19 @@ test("every image loads and is described", async ({ page }) => {
   }
 });
 
-test("Selected work leads to the case study and to each live site", async ({ page }) => {
+test("Selected work leads to each case study and to each live site", async ({ page }) => {
   await page.goto("/");
   const work = page.locator("#work");
-  await expect(work.getByRole("link", { name: "Read the case study" })).toHaveAttribute(
-    "href",
-    "/work/traders-hindsight",
-  );
+  for (const [project, path] of [
+    ["The Trader's Hindsight", CASE_STUDY],
+    ["Isi Lens", ISI_LENS],
+  ] as const) {
+    await expect(
+      work
+        .getByRole("article", { name: project })
+        .getByRole("link", { name: "Read the case study" }),
+    ).toHaveAttribute("href", path);
+  }
   for (const site of ["tradershindsight.com", "isilens.co.uk"]) {
     await expect(work.getByRole("link", { name: site })).toHaveAttribute("href", `https://${site}`);
   }
