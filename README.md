@@ -99,7 +99,8 @@ Its first render is complete HTML, so without JavaScript it still shows the cost
 | `npm run test:e2e`     | Pages, interactions, security headers, search metadata and WCAG 2.2 AA, on desktop and phone |
 | `npm run check`        | All of the above, in that order                                                              |
 
-CI runs the same gates on every push and pull request, and audits dependencies.
+CI runs the same gates on every push and pull request, and audits dependencies: an advisory in
+what the site ships fails the build, and one in development tools is reported as a warning.
 
 ## Security
 

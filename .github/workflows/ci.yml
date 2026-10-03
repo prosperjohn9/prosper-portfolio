@@ -47,4 +47,9 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
+      # What the site ships must have no high or critical advisories.
+      - run: npm audit --omit=dev --audit-level=high
+      # Development tools are audited too, as a warning: an advisory there can
+      # wait on an upstream fix without blocking the site.
       - run: npm audit --audit-level=high
+        continue-on-error: true
