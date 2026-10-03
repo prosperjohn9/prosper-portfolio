@@ -30,7 +30,6 @@ describe("the numbers ledger", () => {
     ["Lines of TypeScript, not counting tests", stats.typescriptLines],
     ["Pages", stats.pages],
     ["API routes", stats.apiRoutes],
-    ["SQL migrations written, now merged into one schema baseline", stats.sqlMigrations],
     ["Automated test files", stats.testFiles],
     ["Lines of tests", stats.testLines],
     ["Commits since December 2025", stats.commits],

@@ -40,10 +40,6 @@ export const receipts = {
     title: "Checked in the code.",
     body: [`The private repository, at commit ${stats.commit}. `, walkthrough, "."],
   },
-  "founder-story": {
-    title: "Founder story.",
-    body: ["Published on ", site, "."],
-  },
   "screenshot-hindsight": {
     title: `Screenshot ${screenshots.hindsight.letter}.`,
     body: [

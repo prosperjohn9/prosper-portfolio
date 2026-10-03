@@ -25,8 +25,8 @@ export const tradersHindsight = {
     lede: [
       "A trading journal that shows forex and prop-firm traders, in money, what their habits cost them. ",
       { claim: "I designed, built and run it on my own", receipt: "git-history" },
-      ", from the first commit on 28 December 2025 to ",
-      { claim: "a live subscription product", receipt: "live-site" },
+      ". ",
+      { claim: "It is a live subscription product", receipt: "live-site" },
       ".",
     ],
     facts: [{ term: "Price", detail: "From $12 a month" }],

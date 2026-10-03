@@ -18,8 +18,6 @@ export interface RepoStats {
   pages: number;
   /** API route handlers. */
   apiRoutes: number;
-  /** SQL migrations written, not counting the file that later consolidated them. */
-  sqlMigrations: number;
   testFiles: number;
   testLines: number;
 }

@@ -10,6 +10,4 @@ export const layout: RepoLayout = {
   generated: /\.d\.ts$/,
   page: /^src\/app\/(.+\/)?page\.tsx$/,
   apiRoute: /^src\/app\/api\/(.+\/)?route\.ts$/,
-  migration: /^db\/migrations\/[^/]+\.sql$/,
-  migrationBaseline: /_baseline\.sql$/,
 };

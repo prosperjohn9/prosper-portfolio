@@ -28,11 +28,6 @@ export const numbers = {
         },
         { what: "Pages", figure: formatCount(stats.pages), source: repository },
         { what: "API routes", figure: formatCount(stats.apiRoutes), source: repository },
-        {
-          what: "SQL migrations written, now merged into one schema baseline",
-          figure: formatCount(stats.sqlMigrations),
-          source: repository,
-        },
         { what: "Automated test files", figure: formatCount(stats.testFiles), source: repository },
         { what: "Lines of tests", figure: formatCount(stats.testLines), source: repository },
         {

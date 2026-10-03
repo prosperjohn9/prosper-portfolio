@@ -7,8 +7,6 @@ const layout: RepoLayout = {
   generated: /\.d\.ts$/,
   page: /^src\/app\/(.+\/)?page\.tsx$/,
   apiRoute: /^src\/app\/api\/(.+\/)?route\.ts$/,
-  migration: /^db\/(migrations|archive)\/.+\.sql$/,
-  migrationBaseline: /_baseline\.sql$/,
 };
 
 describe("parseLineCounts", () => {
@@ -42,9 +40,6 @@ describe("summarise", () => {
     "src/types/database.d.ts",
     "jobs/src/sync.ts",
     "scripts/audit.mjs",
-    "db/archive/20260101_orders.sql",
-    "db/migrations/20260925_baseline.sql",
-    "db/migrations/20260926_messages.sql",
   ];
   const lines = new Map([
     ["src/app/page.tsx", 100],
@@ -66,10 +61,6 @@ describe("summarise", () => {
   it("counts pages and API routes only where the app keeps them", () => {
     expect(stats.pages).toBe(2);
     expect(stats.apiRoutes).toBe(2);
-  });
-
-  it("counts migrations written, not the baseline that consolidated them", () => {
-    expect(stats.sqlMigrations).toBe(2);
   });
 
   it("counts test files and their lines", () => {

@@ -6,7 +6,7 @@
  * Reads files at the given commit (default HEAD) straight from git, so uncommitted
  * changes never leak into the figures. Writes src/content/stats.json.
  *
- * Which files count as pages, API routes, tests and migrations is described in
+ * Which files count as pages, API routes and tests is described in
  * scripts/repo-layout.local.mts, which git ignores, so the product's folder layout
  * stays private. Copy scripts/repo-layout.example.mts to start one.
  */

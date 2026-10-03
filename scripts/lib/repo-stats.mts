@@ -7,14 +7,11 @@ export interface RepoLayout {
   generated: RegExp;
   page: RegExp;
   apiRoute: RegExp;
-  migration: RegExp;
-  /** Migration files that consolidate earlier ones rather than add a change. */
-  migrationBaseline: RegExp;
 }
 
 export type FileMetrics = Pick<
   RepoStats,
-  "typescriptLines" | "pages" | "apiRoutes" | "sqlMigrations" | "testFiles" | "testLines"
+  "typescriptLines" | "pages" | "apiRoutes" | "testFiles" | "testLines"
 >;
 
 /**
@@ -49,9 +46,6 @@ export function summarise(
     typescriptLines: sum(source.map(lines)),
     pages: paths.filter((p) => layout.page.test(p)).length,
     apiRoutes: paths.filter((p) => layout.apiRoute.test(p)).length,
-    sqlMigrations: paths.filter(
-      (p) => layout.migration.test(p) && !layout.migrationBaseline.test(p),
-    ).length,
     testFiles: tests.length,
     testLines: sum(tests.map(lines)),
   };
