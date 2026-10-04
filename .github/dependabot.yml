@@ -20,6 +20,10 @@ updates:
       # Until typescript-eslint, which Next's lint rules use, supports TypeScript 7.
       - dependency-name: typescript
         update-types: [version-update:semver-major]
+      # Until eslint-config-next's bundled plugins (react, import, jsx-a11y)
+      # support ESLint 10, which they crash.
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
     schedule:
