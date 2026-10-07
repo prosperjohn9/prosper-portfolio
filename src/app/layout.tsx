@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -43,6 +44,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        {/* Cookie-free visit counts. The script is served by Vercel at
+            /_vercel/insights, so it only exists in builds Vercel runs. */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );
