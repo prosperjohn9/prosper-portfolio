@@ -16,6 +16,7 @@ Status: in progress. So far: the home page; two case studies, The Trader's Hinds
 - Tailwind CSS 4, with colour and type tokens in `src/app/globals.css`
 - Archivo variable font, self-hosted through `next/font`, using its width axis for hierarchy
 - Vitest for unit tests, Playwright for end-to-end tests, axe for accessibility
+- Vercel Web Analytics for visit counts, with no cookies, in builds Vercel runs
 
 ## Architecture
 
