@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { approximately, formatCount, formatDate, formatMoney } from "@/domain/format";
+import { approximately, formatCount, formatDate, formatMoney, formatMonth } from "@/domain/format";
 
 describe("formatCount", () => {
   it("groups thousands with commas", () => {
@@ -28,6 +28,18 @@ describe("formatDate", () => {
   it("rejects anything that is not a calendar date", () => {
     expect(() => formatDate("27/09/2026")).toThrow();
     expect(() => formatDate("2026-13-01")).toThrow();
+  });
+});
+
+describe("formatMonth", () => {
+  it("prints short month and year", () => {
+    expect(formatMonth("2026-02")).toBe("Feb 2026");
+    expect(formatMonth("2017-07")).toBe("Jul 2017");
+  });
+
+  it("rejects anything that is not a calendar month", () => {
+    expect(() => formatMonth("2026-13")).toThrow();
+    expect(() => formatMonth("Feb 2026")).toThrow();
   });
 });
 

@@ -28,6 +28,14 @@ export const approximately = (value: number, step: number): number =>
 // Fixed names, so server and browser always print the same thing.
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+/** "2026-02" becomes "Feb 2026". */
+export function formatMonth(isoMonth: string): string {
+  const match = /^(\d{4})-(\d{2})$/.exec(isoMonth);
+  const month = match ? MONTHS[Number(match[2]) - 1] : undefined;
+  if (!match || !month) throw new Error(`Expected a YYYY-MM month, got "${isoMonth}".`);
+  return `${month} ${match[1]}`;
+}
+
 /** "2026-09-27" becomes "27 Sep 2026". */
 export function formatDate(isoDate: string): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate);

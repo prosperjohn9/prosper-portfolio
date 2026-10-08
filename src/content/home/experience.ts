@@ -1,3 +1,4 @@
+import type { Degree } from "@/domain/degree";
 import type { Milestone } from "@/domain/portfolio";
 
 export const experience = {
@@ -27,17 +28,30 @@ export const experience = {
     },
   ] satisfies Milestone[],
   educationTitle: "Education",
+  // Also tells search engines what I studied, where and when (see app/page.tsx).
   education: [
     {
-      period: "Feb 2026",
-      title: "M.Sc. Cyber Security, Üsküdar University",
+      award: "M.Sc.",
+      level: "Master's degree",
+      field: "Cyber Security",
+      school: "Üsküdar University",
+      completed: "2026-02",
       detail: "Thesis: AI in cybersecurity, adaptive threat detection.",
     },
     {
-      period: "Jul 2024",
-      title: "B.E. Computer Engineering, Üsküdar University",
+      award: "B.Sc.",
+      level: "Bachelor's degree",
+      field: "Computer Engineering",
+      school: "Üsküdar University",
+      completed: "2024-07",
       detail: "GPA 3.63.",
     },
-    { period: "Jul 2017", title: "B.Ed. Chemistry Education, Delta State University" },
-  ] satisfies Milestone[],
+    {
+      award: "B.Ed.",
+      level: "Bachelor's degree",
+      field: "Chemistry Education",
+      school: "Delta State University",
+      completed: "2017-07",
+    },
+  ] satisfies Degree[],
 };
