@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { isIndexable, pageMetadata, serializeJsonLd, siteUrl } from "@/lib/seo";
+import type { Degree } from "@/domain/degree";
+import { isIndexable, pageMetadata, profilePageJsonLd, serializeJsonLd, siteUrl } from "@/lib/seo";
 
 describe("siteUrl", () => {
   it("uses the production domain Vercel provides", () => {
@@ -38,6 +39,50 @@ describe("pageMetadata", () => {
       type: "article",
       publishedTime: "2026-08-30",
     });
+  });
+});
+
+describe("profilePageJsonLd", () => {
+  const degree = (award: string, school: string, completed: string): Degree => ({
+    award,
+    level: "Bachelor's degree",
+    field: "Engineering",
+    school,
+    completed,
+  });
+  const page = profilePageJsonLd({
+    name: "Ada Example",
+    alternateName: "Ada",
+    jobTitle: "Engineer",
+    url: "https://example.com/",
+    image: "https://example.com/ada.jpg",
+    country: "Nigeria",
+    sameAs: ["https://github.com/ada"],
+    degrees: [degree("M.Sc.", "Uni A", "2026-02"), degree("B.Sc.", "Uni A", "2024-07")],
+  }) as { "@type": string; mainEntity: Record<string, unknown> };
+
+  it("is a profile page about one person", () => {
+    expect(page["@type"]).toBe("ProfilePage");
+    expect(page.mainEntity).toMatchObject({ "@type": "Person", name: "Ada Example" });
+  });
+
+  it("says where the person lives", () => {
+    expect(page.mainEntity.homeLocation).toEqual({ "@type": "Country", name: "Nigeria" });
+  });
+
+  it("names each degree with its school and the month it was completed", () => {
+    expect(page.mainEntity.hasCredential).toContainEqual({
+      "@type": "EducationalOccupationalCredential",
+      name: "M.Sc. Engineering",
+      credentialCategory: "degree",
+      educationalLevel: "Bachelor's degree",
+      dateCreated: "2026-02",
+      recognizedBy: { "@type": "CollegeOrUniversity", name: "Uni A" },
+    });
+  });
+
+  it("lists each school once", () => {
+    expect(page.mainEntity.alumniOf).toEqual([{ "@type": "CollegeOrUniversity", name: "Uni A" }]);
   });
 });
 

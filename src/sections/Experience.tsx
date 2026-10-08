@@ -1,5 +1,6 @@
 import { Section } from "@/components/layout/Section";
 import { experience } from "@/content/home";
+import { degreeMilestone } from "@/domain/degree";
 import type { Milestone } from "@/domain/portfolio";
 
 function Timeline({ items }: { items: readonly Milestone[] }) {
@@ -27,7 +28,7 @@ export function Experience() {
       <div className="max-w-[48rem]">
         <Timeline items={experience.roles} />
         <h3 className="t-h3 mt-10 mb-1">{experience.educationTitle}</h3>
-        <Timeline items={experience.education} />
+        <Timeline items={experience.education.map(degreeMilestone)} />
       </div>
     </Section>
   );

@@ -62,11 +62,21 @@ test("robots.txt lets crawlers in and points them at the sitemap", async ({ requ
 
 test("the home page tells search engines who the site is about", async ({ page }) => {
   await page.goto("/");
-  const person = JSON.parse(
+  const profilePage = JSON.parse(
     (await page.locator('script[type="application/ld+json"]').textContent()) ?? "{}",
   );
+  expect(profilePage["@type"]).toBe("ProfilePage");
+  const person = profilePage.mainEntity;
   expect(person).toMatchObject({ "@type": "Person", name: "Prosper Chukwuemeke Osaigbovo" });
   expect(person.sameAs).toContain("https://www.linkedin.com/in/prosperosaigbovo");
+  // The M.Sc. is complete, and from Üsküdar University.
+  expect(person.hasCredential).toContainEqual(
+    expect.objectContaining({
+      name: "M.Sc. Cyber Security",
+      dateCreated: "2026-02",
+      recognizedBy: { "@type": "CollegeOrUniversity", name: "Üsküdar University" },
+    }),
+  );
 });
 
 test("every icon the head links to exists", async ({ page, request }) => {

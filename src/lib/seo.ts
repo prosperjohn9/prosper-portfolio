@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { type Degree, degreeName } from "@/domain/degree";
 
 type Environment = Record<string, string | undefined>;
 type OpenGraph = NonNullable<Metadata["openGraph"]>;
@@ -47,6 +48,50 @@ export function pageMetadata(page: PageSeo, siteName: string): Metadata {
     description: page.description,
     alternates: { canonical: page.path },
     openGraph,
+  };
+}
+
+/** The facts about a person that search engines may show. */
+export interface PersonFacts {
+  name: string;
+  alternateName: string;
+  jobTitle: string;
+  url: string;
+  image: string;
+  country: string;
+  sameAs: readonly string[];
+  degrees: readonly Degree[];
+}
+
+/**
+ * A page about one person, in schema.org terms: who they are, where they live,
+ * what they studied and which profiles are theirs. Each degree names its school
+ * and the month it was completed, so search engines need not piece it together.
+ */
+export function profilePageJsonLd(person: PersonFacts): object {
+  const school = (name: string) => ({ "@type": "CollegeOrUniversity", name });
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      name: person.name,
+      alternateName: person.alternateName,
+      jobTitle: person.jobTitle,
+      url: person.url,
+      image: person.image,
+      homeLocation: { "@type": "Country", name: person.country },
+      alumniOf: [...new Set(person.degrees.map((degree) => degree.school))].map(school),
+      hasCredential: person.degrees.map((degree) => ({
+        "@type": "EducationalOccupationalCredential",
+        name: degreeName(degree),
+        credentialCategory: "degree",
+        educationalLevel: degree.level,
+        dateCreated: degree.completed,
+        recognizedBy: school(degree.school),
+      })),
+      sameAs: person.sameAs,
+    },
   };
 }
 
